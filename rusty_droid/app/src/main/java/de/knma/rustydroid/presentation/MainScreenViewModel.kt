@@ -3,12 +3,14 @@ package de.knma.rustydroid.presentation
 import android.util.Log
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.lifecycle.ViewModel
+import de.knma.rustydroid.JniManager
 import de.knma.rustydroid.data.BenchmarkResult
 import de.knma.rustydroid.data.Method
 import de.knma.rustydroid.data.toBenchmarkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import uniffi.uniffi_bridge.uniffiAdd
 
 
 class MainScreenViewModel : ViewModel() {
@@ -38,7 +40,23 @@ class MainScreenViewModel : ViewModel() {
         val tempBenchmarkResults = mutableListOf<BenchmarkResult>()
 
         when (method.value) {
-            Method.REVERSE_STRING -> {
+            Method.ADD -> {
+
+                tempBenchmarkResults.addAll(
+                    testAllImplementations(
+                        functions = listOf(
+                            TestObject("uniffi") {
+                                uniffiAdd(it, it)
+                            },
+                            TestObject("kotlin") {
+                                it + it
+                            },
+                            TestObject("jni") {
+                                JniManager.jni_add(it, it)
+                            }
+                        ), input = 1, iterations = iterations
+                    )
+                )
 
             }
 
@@ -47,6 +65,8 @@ class MainScreenViewModel : ViewModel() {
 
             }
         }
+
+        _benchmarkResults.value = tempBenchmarkResults
 
     }
 

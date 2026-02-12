@@ -39,6 +39,10 @@ android {
 
 dependencies {
 
+    // jna for uniffi
+    implementation("net.java.dev.jna:jna:5.18.1@aar")
+
+    // viewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 

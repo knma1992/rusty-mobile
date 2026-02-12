@@ -1,6 +1,7 @@
 package de.knma.rustydroid.data
 
 enum class Method() {
+    ADD,
     REVERSE_STRING,
     SIEVE_OF_ERATOSTHENES,
     REVERSE_INTEGER,
