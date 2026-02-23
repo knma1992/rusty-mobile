@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__acp__Bash",
+      "Bash(echo:*)",
+      "Bash(flutter pub cache:*)",
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:flutterdeck.dev)"
+    ]
+  }
+}
