@@ -58,4 +58,6 @@ extension KeyDownEventExtensions on KeyEvent {
 
   bool get isCharAdd => character == "+";
   bool get isChardMinus => character == "-";
+  bool get isSpace =>
+      (this is KeyDownEvent) && logicalKey == LogicalKeyboardKey.space;
 }

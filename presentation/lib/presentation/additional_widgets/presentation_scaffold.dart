@@ -14,14 +14,14 @@ class BlankCanvas extends ConsumerStatefulWidget {
 }
 
 class _BlankCanvasState extends ConsumerState<BlankCanvas> {
-  final _controller = TransformationController();
   final _focusNode = FocusNode();
+  final _controller = TransformationController();
   bool _isTitleBarVisible = true;
 
   @override
   void dispose() {
-    _controller.dispose();
     _focusNode.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -40,18 +40,24 @@ class _BlankCanvasState extends ConsumerState<BlankCanvas> {
       ref.read(scaleProvider.notifier).increase();
     } else if (event.isChardMinus) {
       ref.read(scaleProvider.notifier).decrease();
+    } else if (event.isSpace) {
+      ref.read(scaleProvider.notifier).reset();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardListener(
+    return Focus(
       focusNode: _focusNode,
-      onKeyEvent: _onKeyEvent,
+      autofocus: true,
+      onKeyEvent: (node, event) {
+        _onKeyEvent(event);
+        return KeyEventResult.ignored;
+      },
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const .all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: InteractiveViewer(
               transformationController: _controller,
               child: widget.body,

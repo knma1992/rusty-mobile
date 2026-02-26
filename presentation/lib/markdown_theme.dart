@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/code_block.dart';
+import 'package:markdown_widget/widget/blocks/leaf/paragraph.dart';
 
-final markDownConfig = MarkdownConfig.darkConfig.copy(
+final markdownConfig = MarkdownConfig.darkConfig.copy(
   configs: [
     PreConfig.darkConfig.copy(
       theme: zedOneDarkTheme,
@@ -11,6 +12,16 @@ final markDownConfig = MarkdownConfig.darkConfig.copy(
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
     ),
+    // H1Config(style: TextStyle(fontSize: 32, color: Colors.white)),
+
+    // // Style H2
+    // H2Config(style: TextStyle(fontSize: 24, color: Colors.white70)),
+
+    // Style body text (paragraphs)
+    PConfig(textStyle: TextStyle(fontSize: 28, color: Colors.white)),
+
+    // Style blockquotes
+    // BlockquoteConfig(sideColor: Colors.blue, textColor: Colors.white70),
   ],
 );
 

@@ -59,6 +59,11 @@ class MainScreenViewModel : ViewModel() {
                 )
 
             }
+            Method.SUB -> {
+
+                val a = JniManager.jniSub(1, 1)
+
+            }
 
             else -> {
 

@@ -16,4 +16,8 @@ class ScaleNotifier extends _$ScaleNotifier {
   void decrease() {
     state = (state - 0.04).clamp(0.5, 2.0);
   }
+
+  void reset() {
+    state = 1.0;
+  }
 }

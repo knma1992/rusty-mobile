@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/main.dart';
-import 'package:presentation/scale_notifier.dart';
 import 'package:presentation/util/context_extensions.dart';
 
 class SlideNavButtons extends ConsumerStatefulWidget {
@@ -37,8 +36,6 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
 
   @override
   Widget build(BuildContext context) {
-    final scale = ref.watch(scaleProvider);
-
     return Stack(
       alignment: .center,
       children: [
@@ -51,7 +48,7 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
             child: IgnorePointer(
               ignoring: !_visible,
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const .symmetric(horizontal: 16, vertical: 8),
                 child: Row(
                   spacing: 16,
                   mainAxisAlignment: .center,
@@ -72,20 +69,9 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
                           : context.previousSlide,
                       icon: const Icon(Icons.arrow_back),
                     ),
-                    SizedBox(
-                      height: 50,
-                      child: Column(
-                        children: [
-                          Text(
-                            (scale * 100).toStringAsFixed(0),
-                            style: context.textTheme.bodyMedium,
-                          ),
-                          Text(
-                            '${(context.currentSlideIndex ?? 0) + 1} / ${slides.length}',
-                            style: context.textTheme.bodyLarge,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      '${(context.currentSlideIndex ?? 0) + 1} / ${slides.length}',
+                      style: context.textTheme.bodyLarge,
                     ),
                     IconButton.filled(
                       onPressed: context.isLastSlide ? null : context.nextSlide,

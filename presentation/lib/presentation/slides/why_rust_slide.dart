@@ -16,6 +16,7 @@ class WhyRustSlide extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: .start,
+      mainAxisSize: .min,
       children: [
         Headline(highlight: 'Why', rest: ': Reasons to use Rust'),
         SizedBox(height: 30),

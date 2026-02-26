@@ -42,6 +42,7 @@ dependencies:
   flutter_riverpod: ^3.2.1
   riverpod_annotation: ^4.0.2
 
+  url_launcher: ^6.3.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/
     - assets/code/
+    - assets/text/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
