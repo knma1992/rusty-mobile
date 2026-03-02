@@ -1,4 +1,6 @@
 ```kotlin
+package de.knma.rustydroid.data
+
 data class City(
     val name: String,
     val population: Int,

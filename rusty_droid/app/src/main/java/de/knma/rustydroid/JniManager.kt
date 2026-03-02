@@ -11,7 +11,5 @@ object JniManager {
     @Suppress("FunctionName")
     external fun jniSub(left: Int, right: Int): Int
 
-
-
 }
 

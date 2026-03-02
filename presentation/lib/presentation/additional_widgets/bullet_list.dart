@@ -11,9 +11,7 @@ class BulletList extends StatelessWidget {
     return Column(
       spacing: 16,
       crossAxisAlignment: .start,
-      children: [
-        for (final item in items) BulletItem(item: item, style: style),
-      ],
+      children: [for (final item in items) BulletItem(item, style: style)],
     );
   }
 }
@@ -21,7 +19,7 @@ class BulletList extends StatelessWidget {
 class BulletItem extends StatelessWidget {
   final String item;
   final TextStyle? style;
-  const BulletItem({super.key, required this.item, this.style});
+  const BulletItem(this.item, {super.key, this.style});
 
   @override
   Widget build(BuildContext context) {

@@ -68,7 +68,8 @@ flutter:
 
   assets:
     - assets/
-    - assets/markdown/
+    - assets/markdown/jni/
+    - assets/markdown/uniffi/
     - assets/images/
     - assets/fonts/
   # To add assets to your application, add an assets section, like this:

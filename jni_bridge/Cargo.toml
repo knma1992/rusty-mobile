@@ -3,11 +3,12 @@ name = "jni_bridge"
 version = "0.1.0"
 edition = "2024"
 
+# tells cargo ndk to cross compile for x86 (emulators) and ARM64
 [package.metadata]
-cargo-ndk = { targets = ["i686-linux-android", "aarch64-linux-android"] }
+cargo-ndk = { targets = ["i686-linux-android", "aarch64-linux-android"]}
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib"] # cdylib stands for C-compatible dynamic library.
 
 [dependencies]
 jni = "0.21.1"

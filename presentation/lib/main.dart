@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:presentation/presentation/additional_widgets/presentation_scaffold.dart';
 import 'package:presentation/presentation/slides/jni_slides.dart';
 import 'package:presentation/presentation/slides/title.dart';
+import 'package:presentation/presentation/slides/uniffi_slides.dart';
 import 'package:presentation/presentation/slides/why_rust_slide.dart';
 import 'package:presentation/scale_notifier.dart';
 import 'package:presentation/theme.dart';
@@ -30,7 +31,12 @@ void main() async {
   runApp(const ProviderScope(child: PresentationApp()));
 }
 
-const List<Widget> slides = [TitleSlide(), WhyRustSlide(), ...jniSlides];
+const List<Widget> slides = [
+  TitleSlide(),
+  WhyRustSlide(),
+  ...jniSlides,
+  ...uniffiSlides,
+];
 
 final GoRouter router = GoRouter(
   initialLocation: '/slide/0',
@@ -63,7 +69,13 @@ class PresentationApp extends ConsumerWidget {
       builder: (context, child) {
         return LayoutBuilder(
           builder: (context, constraints) {
-            final designSize = Size((1920 / scale), (1080 / scale));
+            final designWidth = 1920 / scale;
+            final aspectRatio = constraints.maxWidth / constraints.maxHeight;
+            // On 16:9 this equals 1080/scale; on taller screens it grows
+            final designHeight = (designWidth / aspectRatio).clamp(
+              1080 / scale,
+              double.infinity,
+            );
 
             return Container(
               color: Theme.of(context).scaffoldBackgroundColor,
@@ -72,8 +84,8 @@ class PresentationApp extends ConsumerWidget {
                 alignment: .center,
                 child: ClipRect(
                   child: SizedBox(
-                    width: designSize.width,
-                    height: designSize.height,
+                    width: designWidth,
+                    height: designHeight,
                     child: child,
                   ),
                 ),

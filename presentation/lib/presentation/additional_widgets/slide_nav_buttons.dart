@@ -74,7 +74,13 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
           ),
         ),
 
-        Positioned(right: 24, child: Text("${context.currentSlideIndex}")),
+        Positioned(
+          right: 24,
+          child: Text(
+            "${context.currentSlideIndex}",
+            style: context.textTheme.titleLarge,
+          ),
+        ),
       ],
     );
   }

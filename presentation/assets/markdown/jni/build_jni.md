@@ -1,10 +1,4 @@
-import subprocess
-from pathlib import Path
-
-RUST_PATH = Path(__file__).parent.resolve()
-REPO_PATH = RUST_PATH.parent
-
-
+```python
 def compile_jni_libs(app_name: str) -> None:
     """Compile JNI libraries using Cargo and Android NDK."""
 
@@ -25,11 +19,4 @@ def compile_jni_libs(app_name: str) -> None:
         cwd=RUST_PATH,
         check=True,
     )
-
-
-def main():
-    compile_jni_libs(app_name="rusty_droid")
-
-
-if __name__ == "__main__":
-    main()
+```
