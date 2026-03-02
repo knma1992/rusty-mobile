@@ -18,7 +18,6 @@ const jniSlides = [
   JniFootGun(),
   JniNSA(),
   JniRustAwesome(),
-  JniRustAwesomeAnswer(),
   JniDetail(),
   JniFunction(),
   JniObjects(),
@@ -168,29 +167,6 @@ class JniRustAwesome extends StatelessWidget {
         jniHeadline,
         BulletList(items: ["Rust handles that for us by implementing drop."]),
         MarkdownWidget(assetPath: 'assets/markdown/ghidra.md'),
-        Center(child: HighlightText("Who can spot the fancy jump?")),
-      ],
-    );
-  }
-}
-
-class JniRustAwesomeAnswer extends StatelessWidget {
-  const JniRustAwesomeAnswer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: 16,
-      crossAxisAlignment: .start,
-      children: [
-        const JniRustAwesome(),
-        const Center(child: HighlightText("CBZ: Compare and Branch if Zero")),
-        Center(
-          child: Text(
-            "Let's take a closer look!",
-            style: context.textTheme.displayMedium,
-          ),
-        ),
       ],
     );
   }
@@ -249,7 +225,7 @@ class JniFunction extends StatelessWidget {
         MarkdownWidget(assetPath: 'assets/markdown/jni.md'),
         BulletList(
           items: [
-            "With the jni_fn annotation the function signature is significantly simplified.",
+            "With the jni_fn annotation the function signature is simplified.",
           ],
         ),
         MarkdownWidget(assetPath: 'assets/markdown/jni_fn.md'),
