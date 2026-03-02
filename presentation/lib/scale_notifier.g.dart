@@ -41,7 +41,7 @@ final class ScaleNotifierProvider
   }
 }
 
-String _$scaleNotifierHash() => r'65e070a101742f3cffaabc459efd72d0da38169c';
+String _$scaleNotifierHash() => r'6abd249605d40a0146aca86b4abde94ec26c32fb';
 
 abstract class _$ScaleNotifier extends $Notifier<double> {
   double build();

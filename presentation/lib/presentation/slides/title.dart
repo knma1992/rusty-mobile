@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/presentation/additional_widgets/alert_text.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
 
 class TitleSlide extends StatelessWidget {
@@ -6,37 +7,40 @@ class TitleSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: .center,
-      crossAxisAlignment: .center,
-      children: [
-        Headline(
-          highlight: 'Rust on Mobile',
-          rest: ': Comparing JNI, UniFFI, and Flutter Rust Bridge',
-        ),
-        SizedBox(height: 30),
-        Padding(
-          padding: const .all(16.0),
-          child: Row(
-            spacing: 16,
-            children: [
-              Image.asset(
-                'assets/markus_profile_pic.png',
-                height: 120,
-                fit: BoxFit.fitHeight,
-              ),
-              Column(
-                crossAxisAlignment: .start,
-                children: [
-                  Text("Markus Knoch"),
-                  Text("markus.knoch@kenbun.de"),
-                  Text("ML/Mobile Developer"),
-                ],
-              ),
-            ],
+    return Padding(
+      padding: const .fromLTRB(32.0, 0, 32.0, 16.0),
+      child: Column(
+        mainAxisAlignment: .center,
+        crossAxisAlignment: .center,
+        children: [
+          const Headline(
+            highlight: 'Rust on Mobile',
+            rest: ': Comparing JNI, UniFFI, and Flutter Rust Bridge',
           ),
-        ),
-      ],
+          const SizedBox(height: 30),
+          Padding(
+            padding: const .all(16.0),
+            child: Row(
+              spacing: 16,
+              children: [
+                Image.asset(
+                  'assets/images/markus_profile_pic.png',
+                  height: 250,
+                  fit: .fitHeight,
+                ),
+                const Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    SmallText("Markus Knoch"),
+                    SmallText("markus.knoch@kenbun.de"),
+                    SmallText("ML/Mobile Developer"),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

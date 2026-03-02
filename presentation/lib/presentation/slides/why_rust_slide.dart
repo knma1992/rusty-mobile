@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation/additional_widgets/bullet_list.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
+import 'package:presentation/util/context_extensions.dart';
 
 class WhyRustSlide extends StatelessWidget {
   const WhyRustSlide({super.key});
@@ -16,11 +17,9 @@ class WhyRustSlide extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: .start,
-      mainAxisSize: .min,
       children: [
-        Headline(highlight: 'Why', rest: ': Reasons to use Rust'),
-        SizedBox(height: 30),
-        BulletList(items: items),
+        const Headline(highlight: 'Why', rest: ': Reasons to use Rust'),
+        BulletList(items: items, style: context.textTheme.displayMedium),
       ],
     );
   }

@@ -16,12 +16,6 @@ void main() async {
 
   await windowManager.ensureInitialized();
 
-  await Future.wait([
-    rootBundle.loadString('assets/code/drop_example.md'),
-    rootBundle.loadString('assets/text/ghidra.md'),
-    rootBundle.loadString('assets/code/jni.md'),
-  ]);
-
   WindowOptions windowOptions = const WindowOptions(
     title: '',
     titleBarStyle: TitleBarStyle.normal,
@@ -33,10 +27,10 @@ void main() async {
     await windowManager.focus();
   });
 
-  runApp(ProviderScope(child: PresentationApp()));
+  runApp(const ProviderScope(child: PresentationApp()));
 }
 
-final List<Widget> slides = [TitleSlide(), WhyRustSlide(), ...jniSlides];
+const List<Widget> slides = [TitleSlide(), WhyRustSlide(), ...jniSlides];
 
 final GoRouter router = GoRouter(
   initialLocation: '/slide/0',
@@ -69,10 +63,7 @@ class PresentationApp extends ConsumerWidget {
       builder: (context, child) {
         return LayoutBuilder(
           builder: (context, constraints) {
-            final designSize = Size(
-              (constraints.maxWidth / scale).clamp(800, double.infinity),
-              (constraints.maxHeight / scale).clamp(600, double.infinity),
-            );
+            final designSize = Size((1920 / scale), (1080 / scale));
 
             return Container(
               color: Theme.of(context).scaffoldBackgroundColor,

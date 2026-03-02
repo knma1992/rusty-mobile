@@ -53,16 +53,6 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
                   spacing: 16,
                   mainAxisAlignment: .center,
                   children: [
-                    // IconButton.filled(
-                    //   onPressed: () =>
-                    //       ref.read(scaleProvider.notifier).increase(),
-                    //   icon: const Icon(Icons.add),
-                    // ),
-                    // IconButton.filled(
-                    //   onPressed: () =>
-                    //       ref.read(scaleProvider.notifier).decrease(),
-                    //   icon: const Icon(Icons.remove),
-                    // ),
                     IconButton.filled(
                       onPressed: context.isFirstSlide
                           ? null

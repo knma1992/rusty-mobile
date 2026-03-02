@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.lifecycle.ViewModel
 import de.knma.rustydroid.JniManager
 import de.knma.rustydroid.data.BenchmarkResult
+import de.knma.rustydroid.data.City
 import de.knma.rustydroid.data.Method
 import de.knma.rustydroid.data.toBenchmarkResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -62,6 +63,13 @@ class MainScreenViewModel : ViewModel() {
             Method.SUB -> {
 
                 val a = JniManager.jniSub(1, 1)
+
+            }
+            Method.GET_KARLSRUHE -> {
+
+                val city = City.get_karlsruhe()
+
+                Log.d("MainScreenViewModel", "Karlsruhe: ${city.name}, ${city.area}")
 
             }
 
