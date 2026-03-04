@@ -35,7 +35,6 @@ import androidx.core.text.isDigitsOnly
 import de.knma.rustydroid.data.BenchmarkResult
 import de.knma.rustydroid.data.Method
 import de.knma.rustydroid.data.format
-import kotlin.collections.forEach
 
 @Composable
 fun BenchmarkDisplay(
@@ -65,7 +64,7 @@ fun BenchmarkDisplay(
                 verticalAlignment = Alignment.Top
             ) {
 
-                if (method != Method.REVERSE_STRING) {
+                if (method == Method.SIEVE_OF_ERATOSTHENES) {
 
                     OutlinedTextField(
                         state = limitTextFieldState,

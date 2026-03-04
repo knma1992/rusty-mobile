@@ -635,6 +635,8 @@ internal object IntegrityCheckingUniffiLib {
         uniffiCheckContractApiVersion(this)
         uniffiCheckApiChecksums(this)
     }
+    external fun uniffi_uniffi_bridge_checksum_func_get_karlsruhe_uniffi(
+    ): Short
     external fun uniffi_uniffi_bridge_checksum_func_uniffi_add(
     ): Short
     external fun ffi_uniffi_bridge_uniffi_contract_version(
@@ -650,6 +652,8 @@ internal object UniffiLib {
         Native.register(UniffiLib::class.java, findLibraryName(componentName = "uniffi_bridge"))
         
     }
+    external fun uniffi_uniffi_bridge_fn_func_get_karlsruhe_uniffi(uniffi_out_err: UniffiRustCallStatus, 
+    ): RustBuffer.ByValue
     external fun uniffi_uniffi_bridge_fn_func_uniffi_add(`left`: Int,`right`: Int,uniffi_out_err: UniffiRustCallStatus, 
     ): Int
     external fun ffi_uniffi_bridge_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
@@ -771,6 +775,9 @@ private fun uniffiCheckContractApiVersion(lib: IntegrityCheckingUniffiLib) {
 }
 @Suppress("UNUSED_PARAMETER")
 private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
+    if (lib.uniffi_uniffi_bridge_checksum_func_get_karlsruhe_uniffi() != 36417.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
     if (lib.uniffi_uniffi_bridge_checksum_func_uniffi_add() != 47467.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -893,6 +900,52 @@ public object FfiConverterInt: FfiConverter<Int, Int> {
 /**
  * @suppress
  */
+public object FfiConverterFloat: FfiConverter<Float, Float> {
+    override fun lift(value: Float): Float {
+        return value
+    }
+
+    override fun read(buf: ByteBuffer): Float {
+        return buf.getFloat()
+    }
+
+    override fun lower(value: Float): Float {
+        return value
+    }
+
+    override fun allocationSize(value: Float) = 4UL
+
+    override fun write(value: Float, buf: ByteBuffer) {
+        buf.putFloat(value)
+    }
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterBoolean: FfiConverter<Boolean, Byte> {
+    override fun lift(value: Byte): Boolean {
+        return value.toInt() != 0
+    }
+
+    override fun read(buf: ByteBuffer): Boolean {
+        return lift(buf.get())
+    }
+
+    override fun lower(value: Boolean): Byte {
+        return if (value) 1.toByte() else 0.toByte()
+    }
+
+    override fun allocationSize(value: Boolean) = 1UL
+
+    override fun write(value: Boolean, buf: ByteBuffer) {
+        buf.put(lower(value))
+    }
+}
+
+/**
+ * @suppress
+ */
 public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     // Note: we don't inherit from FfiConverterRustBuffer, because we use a
     // special encoding when lowering/lifting.  We can use `RustBuffer.len` to
@@ -945,7 +998,131 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
         buf.putInt(byteBuf.limit())
         buf.put(byteBuf)
     }
-} fun `uniffiAdd`(`left`: kotlin.Int, `right`: kotlin.Int): kotlin.Int {
+}
+
+
+
+data class UniffiCity (
+    var `name`: kotlin.String
+    , 
+    var `population`: kotlin.Int
+    , 
+    var `area`: kotlin.Float
+    , 
+    var `isCapital`: kotlin.Boolean
+    , 
+    var `districtPopulations`: List<kotlin.Int>
+    , 
+    var `districtAreas`: List<kotlin.Float>
+    
+){
+    
+
+    
+
+    
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeUniffiCity: FfiConverterRustBuffer<UniffiCity> {
+    override fun read(buf: ByteBuffer): UniffiCity {
+        return UniffiCity(
+            FfiConverterString.read(buf),
+            FfiConverterInt.read(buf),
+            FfiConverterFloat.read(buf),
+            FfiConverterBoolean.read(buf),
+            FfiConverterSequenceInt.read(buf),
+            FfiConverterSequenceFloat.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: UniffiCity) = (
+            FfiConverterString.allocationSize(value.`name`) +
+            FfiConverterInt.allocationSize(value.`population`) +
+            FfiConverterFloat.allocationSize(value.`area`) +
+            FfiConverterBoolean.allocationSize(value.`isCapital`) +
+            FfiConverterSequenceInt.allocationSize(value.`districtPopulations`) +
+            FfiConverterSequenceFloat.allocationSize(value.`districtAreas`)
+    )
+
+    override fun write(value: UniffiCity, buf: ByteBuffer) {
+            FfiConverterString.write(value.`name`, buf)
+            FfiConverterInt.write(value.`population`, buf)
+            FfiConverterFloat.write(value.`area`, buf)
+            FfiConverterBoolean.write(value.`isCapital`, buf)
+            FfiConverterSequenceInt.write(value.`districtPopulations`, buf)
+            FfiConverterSequenceFloat.write(value.`districtAreas`, buf)
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceInt: FfiConverterRustBuffer<List<kotlin.Int>> {
+    override fun read(buf: ByteBuffer): List<kotlin.Int> {
+        val len = buf.getInt()
+        return List<kotlin.Int>(len) {
+            FfiConverterInt.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<kotlin.Int>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterInt.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<kotlin.Int>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterInt.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceFloat: FfiConverterRustBuffer<List<kotlin.Float>> {
+    override fun read(buf: ByteBuffer): List<kotlin.Float> {
+        val len = buf.getInt()
+        return List<kotlin.Float>(len) {
+            FfiConverterFloat.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<kotlin.Float>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterFloat.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<kotlin.Float>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterFloat.write(it, buf)
+        }
+    }
+} fun `getKarlsruheUniffi`(): UniffiCity {
+            return FfiConverterTypeUniffiCity.lift(
+    uniffiRustCall() { _status ->
+    UniffiLib.uniffi_uniffi_bridge_fn_func_get_karlsruhe_uniffi(
+    
+        _status)
+}
+    )
+    }
+    
+ fun `uniffiAdd`(`left`: kotlin.Int, `right`: kotlin.Int): kotlin.Int {
             return FfiConverterInt.lift(
     uniffiRustCall() { _status ->
     UniffiLib.uniffi_uniffi_bridge_fn_func_uniffi_add(

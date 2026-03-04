@@ -41,6 +41,10 @@ dependencies:
   google_fonts: ^8.0.1
   flutter_riverpod: ^3.2.1
   riverpod_annotation: ^4.0.2
+  freezed_annotation: ^3.1.0
+
+  iron_bird_call:
+    path: ../iron_bird_call
 
   url_launcher: ^6.3.2
 dev_dependencies:
@@ -55,6 +59,9 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   riverpod_generator: ^4.0.3
   build_runner: ^2.11.1
+  freezed: ^3.2.5
+
+  flutter_launcher_icons: "^0.14.4"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,6 +77,7 @@ flutter:
     - assets/
     - assets/markdown/jni/
     - assets/markdown/uniffi/
+    - assets/markdown/frb/
     - assets/images/
     - assets/fonts/
   # To add assets to your application, add an assets section, like this:

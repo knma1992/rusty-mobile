@@ -1,8 +1,10 @@
 package de.knma.rustydroid.presentation
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.text.input.TextFieldState
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import de.knma.rustydroid.JniManager
 import de.knma.rustydroid.data.BenchmarkResult
 import de.knma.rustydroid.data.City
@@ -11,10 +13,11 @@ import de.knma.rustydroid.data.toBenchmarkResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import uniffi.uniffi_bridge.getKarlsruheUniffi
 import uniffi.uniffi_bridge.uniffiAdd
 
 
-class MainScreenViewModel : ViewModel() {
+class MainScreenViewModel(application: Application) : AndroidViewModel(application) {
 
     val methods: Array<Method> = Method.entries.toTypedArray()
     private val _method = MutableStateFlow(methods.first())
@@ -67,15 +70,26 @@ class MainScreenViewModel : ViewModel() {
             }
             Method.GET_KARLSRUHE -> {
 
-                val city = City.get_karlsruhe()
-
-                Log.d("MainScreenViewModel", "Karlsruhe: ${city.name}, ${city.area}")
-
+                tempBenchmarkResults.addAll(
+                    testAllImplementations(
+                        functions = listOf(
+                            TestObject("uniffi") {
+                                val city = getKarlsruheUniffi()
+                                Log.d("MainScreenViewModel", "jni Karlsruhe: ${city.name}, ${city.area}")
+                            },
+                            TestObject("jni") {
+                                val city = City.get_karlsruhe()
+                                Log.d("MainScreenViewModel", "uniffi Karlsruhe: ${city.name}, ${city.area}")
+                            }
+                        ), input = 1, iterations = iterations
+                    )
+                )
             }
 
             else -> {
 
-
+                val toast = Toast.makeText(getApplication(), "Implement your own Benchmark", Toast.LENGTH_SHORT) // in Activity
+                toast.show()
             }
         }
 

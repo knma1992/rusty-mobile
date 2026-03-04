@@ -128,11 +128,11 @@ class JniSetupProjectFirst extends StatelessWidget {
       children: [
         jniHeadline,
         BulletItem(
-          "Install Rust and set up a Rust library near your Androud porject.",
+          "Install Rust and set up a Rust library near your Android porject.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/cargo_init.md'),
+        MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_init.md'),
         BulletItem(
-          "Add crate type for creating a C-compatible dynamic library and ndk compile targets.",
+          "Add crate-type for creating a C-compatible dynamic library and ndk compile targets.",
         ),
         MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_toml.md'),
         BulletItem("Install Rust compile targets"),
@@ -390,7 +390,7 @@ class JniRecap extends StatelessWidget {
           items: [
             "JNI bridges Java/Kotlin and native Rust code via a shared library (.so).",
             "But sending objects is overly complicated and error prone.",
-            "It could be circumvented by sending JSON",
+            "It could be circumvented by sending JSON.",
           ],
         ),
         SizedBox(height: 90),
