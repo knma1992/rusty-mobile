@@ -110,7 +110,7 @@ class JniFootGunBefore extends StatelessWidget {
         SizedBox(height: 50),
         Center(
           child: HighlightText(
-            "But before we get in to that! Let's set up a Rust library.",
+            "But before we get into that! Let's set up a Rust library.",
           ),
         ),
       ],
@@ -128,7 +128,7 @@ class JniSetupProjectFirst extends StatelessWidget {
       children: [
         jniHeadline,
         BulletItem(
-          "Install Rust and set up a Rust library near your Android porject.",
+          "Install Rust and set up a Rust library near your Android project.",
         ),
         MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_init.md'),
         BulletItem(

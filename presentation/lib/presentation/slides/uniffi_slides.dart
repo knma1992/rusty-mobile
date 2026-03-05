@@ -32,9 +32,9 @@ class UniffiOverview extends StatelessWidget {
         BulletList(
           items: [
             "Generates cross-language bindings from a single Rust library.",
-            "Supports multiple languages like Kotlin, Swift, and Python, with third party extensions for other langauges like C#.",
+            "Supports multiple languages like Kotlin, Swift, and Python, with third party extensions for other languages like C#.",
             "Uses a UDL interface definition or proc macros to describe your API.",
-            "Offial crate from mozilla.",
+            "Official crate from mozilla.",
           ],
         ),
       ],
@@ -106,7 +106,7 @@ class UniffiBuild extends StatelessWidget {
           child: Padding(
             padding: .symmetric(vertical: 10.0),
             child: HighlightText(
-              "Now lets take a look in to the generated bindings!",
+              "Now let's take a look into the generated bindings!",
             ),
           ),
         ),
@@ -125,13 +125,13 @@ class UniffiGenerated extends StatelessWidget {
       children: [
         uniffiHeadline,
         BulletItem(
-          "Its all there, 1137 lines of generated slob for two functions and a data class.",
+          "It's all there, 1137 lines of generated blob for two functions and a data class.",
         ),
         MarkdownWidget(assetPath: 'assets/markdown/uniffi/uniffi_garbage.md'),
         Center(
           child: Padding(
             padding: .symmetric(vertical: 10.0),
-            child: HighlightText("Lets run some benchmarks!"),
+            child: HighlightText("Let's run some benchmarks!"),
           ),
         ),
       ],

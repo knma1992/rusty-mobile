@@ -32,7 +32,7 @@ class FrbHint extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: .center,
-          children: [HighlightText("Maybe there is a even better way?")],
+          children: [HighlightText("Maybe there is an even better way?")],
         ),
       ],
     );
@@ -51,9 +51,9 @@ class FrbOverview extends StatelessWidget {
         const BulletList(
           items: [
             "Why fight the JVM when you can just use Flutter.",
-            "No more JNI/JNA Flutter and Rust play nicely with the FFI.",
+            "No more JNI/JNA. Flutter and Rust play nicely with the FFI.",
             "Rust is cross platform and so is Flutter.",
-            "Rust runs in a seperated Thread and does not block the ui thread.",
+            "Rust runs in a separate thread and does not block the UI thread.",
             "Auto generates bindings.",
             "Structs get translated in to data classes and enum to sealed classes.",
           ],
@@ -89,7 +89,7 @@ class FrbSetup extends StatelessWidget {
         frbHeadline,
         BulletItem("Install Flutter Rust Bridge Codegen."),
         MarkdownWidget(assetPath: 'assets/markdown/frb/install.md'),
-        BulletItem("Create the app and your ready to go."),
+        BulletItem("Create the app and you're ready to go."),
         MarkdownWidget(assetPath: 'assets/markdown/frb/setup.md'),
       ],
     );

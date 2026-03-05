@@ -22,7 +22,7 @@ class MarkdownWidget extends ConsumerWidget {
     final asyncData = ref.watch(markdownAssetProvider(assetPath));
     return asyncData.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Fehler: $e')),
+      error: (e, _) => Center(child: Text('Error: $e')),
       data: (data) => MediaQuery(
         data: MediaQuery.of(
           context,
