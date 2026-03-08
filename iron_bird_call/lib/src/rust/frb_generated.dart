@@ -3,9 +3,10 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
-import 'api/audio/mel_spectrogram.dart';
 import 'api/audio/rust_audio_recorder.dart';
+import 'api/city.dart';
 import 'api/simple.dart';
+import 'api/terrain.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.dart';
@@ -68,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 816536775;
+  int get rustContentHash => 175531572;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -79,27 +80,6 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Size crateApiAudioMelSpectrogramInferencePipelineAutoAccessorGetImageSize({
-    required InferencePipeline that,
-  });
-
-  void crateApiAudioMelSpectrogramInferencePipelineAutoAccessorSetImageSize({
-    required InferencePipeline that,
-    required Size imageSize,
-  });
-
-  Future<InferencePipeline> crateApiAudioMelSpectrogramInferencePipelineNew({
-    required Size imageSize,
-  });
-
-  Stream<Uint8List> crateApiAudioMelSpectrogramInferencePipelineStart({
-    required InferencePipeline that,
-  });
-
-  Future<void> crateApiAudioMelSpectrogramInferencePipelineStop({
-    required InferencePipeline that,
-  });
-
   int?
   crateApiAudioRustAudioRecorderRustAudioRecorderAutoAccessorGetBufferSize({
     required RustAudioRecorder that,
@@ -148,20 +128,18 @@ abstract class RustLibApi extends BaseApi {
     required RustAudioRecorder that,
   });
 
+  Future<City> crateApiCityGetKarlsruhe();
+
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
 
-  Stream<Uint8List> crateApiSimpleTerrainStream({required Size imageSize});
+  Future<TerrainColors> crateApiTerrainTerrainColorsDefault();
 
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_InferencePipeline;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_InferencePipeline;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_InferencePipelinePtr;
+  Stream<Uint8List> crateApiTerrainTerrainStream({
+    required Size imageSize,
+    required TerrainColors colors,
+  });
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_RustAudioRecorder;
@@ -182,188 +160,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Size crateApiAudioMelSpectrogramInferencePipelineAutoAccessorGetImageSize({
-    required InferencePipeline that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-            that,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_size,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateApiAudioMelSpectrogramInferencePipelineAutoAccessorGetImageSizeConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateApiAudioMelSpectrogramInferencePipelineAutoAccessorGetImageSizeConstMeta =>
-      const TaskConstMeta(
-        debugName: "InferencePipeline_auto_accessor_get_image_size",
-        argNames: ["that"],
-      );
-
-  @override
-  void crateApiAudioMelSpectrogramInferencePipelineAutoAccessorSetImageSize({
-    required InferencePipeline that,
-    required Size imageSize,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-            that,
-            serializer,
-          );
-          sse_encode_size(imageSize, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
-          decodeErrorData: null,
-        ),
-        constMeta:
-            kCrateApiAudioMelSpectrogramInferencePipelineAutoAccessorSetImageSizeConstMeta,
-        argValues: [that, imageSize],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateApiAudioMelSpectrogramInferencePipelineAutoAccessorSetImageSizeConstMeta =>
-      const TaskConstMeta(
-        debugName: "InferencePipeline_auto_accessor_set_image_size",
-        argNames: ["that", "imageSize"],
-      );
-
-  @override
-  Future<InferencePipeline> crateApiAudioMelSpectrogramInferencePipelineNew({
-    required Size imageSize,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_box_autoadd_size(imageSize, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 3,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiAudioMelSpectrogramInferencePipelineNewConstMeta,
-        argValues: [imageSize],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiAudioMelSpectrogramInferencePipelineNewConstMeta =>
-      const TaskConstMeta(
-        debugName: "InferencePipeline_new",
-        argNames: ["imageSize"],
-      );
-
-  @override
-  Stream<Uint8List> crateApiAudioMelSpectrogramInferencePipelineStart({
-    required InferencePipeline that,
-  }) {
-    final sink = RustStreamSink<Uint8List>();
-    unawaited(
-      handler.executeNormal(
-        NormalTask(
-          callFfi: (port_) {
-            final serializer = SseSerializer(generalizedFrbRustBinding);
-            sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-              that,
-              serializer,
-            );
-            sse_encode_StreamSink_list_prim_u_8_strict_Sse(sink, serializer);
-            pdeCallFfi(
-              generalizedFrbRustBinding,
-              serializer,
-              funcId: 4,
-              port: port_,
-            );
-          },
-          codec: SseCodec(
-            decodeSuccessData: sse_decode_unit,
-            decodeErrorData: sse_decode_AnyhowException,
-          ),
-          constMeta:
-              kCrateApiAudioMelSpectrogramInferencePipelineStartConstMeta,
-          argValues: [that, sink],
-          apiImpl: this,
-        ),
-      ),
-    );
-    return sink.stream;
-  }
-
-  TaskConstMeta
-  get kCrateApiAudioMelSpectrogramInferencePipelineStartConstMeta =>
-      const TaskConstMeta(
-        debugName: "InferencePipeline_start",
-        argNames: ["that", "sink"],
-      );
-
-  @override
-  Future<void> crateApiAudioMelSpectrogramInferencePipelineStop({
-    required InferencePipeline that,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-            that,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 5,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
-          decodeErrorData: sse_decode_AnyhowException,
-        ),
-        constMeta: kCrateApiAudioMelSpectrogramInferencePipelineStopConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateApiAudioMelSpectrogramInferencePipelineStopConstMeta =>
-      const TaskConstMeta(
-        debugName: "InferencePipeline_stop",
-        argNames: ["that"],
-      );
-
-  @override
   int?
   crateApiAudioRustAudioRecorderRustAudioRecorderAutoAccessorGetBufferSize({
     required RustAudioRecorder that,
@@ -376,7 +172,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_u_32,
@@ -409,7 +205,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_u_16,
@@ -442,7 +238,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_u_32,
@@ -478,7 +274,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_opt_box_autoadd_u_32(bufferSize, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -513,7 +309,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_u_16(channels, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -549,7 +345,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_u_32(sampleRate, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -576,7 +372,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -613,7 +409,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 13,
+              funcId: 8,
               port: port_,
             );
           },
@@ -661,7 +457,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 14,
+              funcId: 9,
               port: port_,
             );
           },
@@ -701,7 +497,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 10,
             port: port_,
           );
         },
@@ -725,13 +521,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<City> crateApiCityGetKarlsruhe() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 11,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_city,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiCityGetKarlsruheConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiCityGetKarlsruheConstMeta =>
+      const TaskConstMeta(debugName: "get_karlsruhe", argNames: []);
+
+  @override
   String crateApiSimpleGreet({required String name}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -756,7 +579,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 17,
+            funcId: 13,
             port: port_,
           );
         },
@@ -775,7 +598,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override
-  Stream<Uint8List> crateApiSimpleTerrainStream({required Size imageSize}) {
+  Future<TerrainColors> crateApiTerrainTerrainColorsDefault() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 14,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_terrain_colors,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiTerrainTerrainColorsDefaultConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiTerrainTerrainColorsDefaultConstMeta =>
+      const TaskConstMeta(debugName: "terrain_colors_default", argNames: []);
+
+  @override
+  Stream<Uint8List> crateApiTerrainTerrainStream({
+    required Size imageSize,
+    required TerrainColors colors,
+  }) {
     final sink = RustStreamSink<Uint8List>();
     unawaited(
       handler.executeNormal(
@@ -783,11 +636,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           callFfi: (port_) {
             final serializer = SseSerializer(generalizedFrbRustBinding);
             sse_encode_box_autoadd_size(imageSize, serializer);
+            sse_encode_box_autoadd_terrain_colors(colors, serializer);
             sse_encode_StreamSink_list_prim_u_8_strict_Sse(sink, serializer);
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 18,
+              funcId: 15,
               port: port_,
             );
           },
@@ -795,8 +649,8 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             decodeSuccessData: sse_decode_unit,
             decodeErrorData: sse_decode_AnyhowException,
           ),
-          constMeta: kCrateApiSimpleTerrainStreamConstMeta,
-          argValues: [imageSize, sink],
+          constMeta: kCrateApiTerrainTerrainStreamConstMeta,
+          argValues: [imageSize, colors, sink],
           apiImpl: this,
         ),
       ),
@@ -804,19 +658,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return sink.stream;
   }
 
-  TaskConstMeta get kCrateApiSimpleTerrainStreamConstMeta =>
+  TaskConstMeta get kCrateApiTerrainTerrainStreamConstMeta =>
       const TaskConstMeta(
         debugName: "terrain_stream",
-        argNames: ["imageSize", "sink"],
+        argNames: ["imageSize", "colors", "sink"],
       );
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_InferencePipeline => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_InferencePipeline => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_RustAudioRecorder => wire
@@ -833,30 +679,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  InferencePipeline
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   RustAudioRecorder
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return RustAudioRecorderImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  InferencePipeline
-  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -869,30 +697,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  InferencePipeline
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   RustAudioRecorder
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return RustAudioRecorderImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  InferencePipeline
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -927,9 +737,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
   Size dco_decode_box_autoadd_size(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_size(raw);
+  }
+
+  @protected
+  TerrainColors dco_decode_box_autoadd_terrain_colors(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_terrain_colors(raw);
   }
 
   @protected
@@ -939,7 +761,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  City dco_decode_city(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return City(
+      name: dco_decode_String(arr[0]),
+      population: dco_decode_i_32(arr[1]),
+      area: dco_decode_f_32(arr[2]),
+      isCapital: dco_decode_bool(arr[3]),
+      districtPopulations: dco_decode_list_prim_i_32_strict(arr[4]),
+      districtAreas: dco_decode_list_prim_f_32_strict(arr[5]),
+    );
+  }
+
+  @protected
   double dco_decode_f_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
   }
@@ -957,15 +801,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Int32List dco_decode_list_prim_i_32_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as Int32List;
+  }
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
   }
 
   @protected
+  List<TerrainThreshold> dco_decode_list_terrain_threshold(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_terrain_threshold).toList();
+  }
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  (int, int, int) dco_decode_record_u_8_u_8_u_8(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3) {
+      throw Exception('Expected 3 elements, got ${arr.length}');
+    }
+    return (
+      dco_decode_u_8(arr[0]),
+      dco_decode_u_8(arr[1]),
+      dco_decode_u_8(arr[2]),
+    );
   }
 
   @protected
@@ -981,6 +851,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  TerrainColors dco_decode_terrain_colors(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return TerrainColors(
+      thresholds: dco_decode_list_terrain_threshold(arr[0]),
+      fallback: dco_decode_record_u_8_u_8_u_8(arr[1]),
+    );
+  }
+
+  @protected
+  TerrainThreshold dco_decode_terrain_threshold(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return TerrainThreshold(
+      threshold: dco_decode_f_64(arr[0]),
+      r: dco_decode_u_8(arr[1]),
+      g: dco_decode_u_8(arr[2]),
+      b: dco_decode_u_8(arr[3]),
+    );
+  }
+
+  @protected
   int dco_decode_u_16(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -990,6 +886,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   int dco_decode_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
   }
 
   @protected
@@ -1011,22 +913,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  WorldEvent dco_decode_world_event(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return WorldEvent_TerrainGenerated(
+          x: dco_decode_i_32(raw[1]),
+          y: dco_decode_i_32(raw[2]),
+          width: dco_decode_u_32(raw[3]),
+          height: dco_decode_u_32(raw[4]),
+          seed: dco_decode_u_64(raw[5]),
+        );
+      case 1:
+        return WorldEvent_WeatherChanged(
+          temperature: dco_decode_f_32(raw[1]),
+          humidity: dco_decode_f_32(raw[2]),
+          windSpeed: dco_decode_f_32(raw[3]),
+          description: dco_decode_String(raw[4]),
+        );
+      case 2:
+        return WorldEvent_RegionEntered(
+          regionName: dco_decode_String(raw[1]),
+          population: dco_decode_u_32(raw[2]),
+          hostile: dco_decode_bool(raw[3]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_String(deserializer);
     return AnyhowException(inner);
-  }
-
-  @protected
-  InferencePipeline
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
   }
 
   @protected
@@ -1036,18 +956,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return RustAudioRecorderImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  InferencePipeline
-  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1066,36 +974,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  InferencePipeline
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   RustAudioRecorder
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return RustAudioRecorderImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  InferencePipeline
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return InferencePipelineImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1137,9 +1021,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
   Size sse_decode_box_autoadd_size(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_size(deserializer));
+  }
+
+  @protected
+  TerrainColors sse_decode_box_autoadd_terrain_colors(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_terrain_colors(deserializer));
   }
 
   @protected
@@ -1149,9 +1047,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  City sse_decode_city(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_name = sse_decode_String(deserializer);
+    var var_population = sse_decode_i_32(deserializer);
+    var var_area = sse_decode_f_32(deserializer);
+    var var_isCapital = sse_decode_bool(deserializer);
+    var var_districtPopulations = sse_decode_list_prim_i_32_strict(
+      deserializer,
+    );
+    var var_districtAreas = sse_decode_list_prim_f_32_strict(deserializer);
+    return City(
+      name: var_name,
+      population: var_population,
+      area: var_area,
+      isCapital: var_isCapital,
+      districtPopulations: var_districtPopulations,
+      districtAreas: var_districtAreas,
+    );
+  }
+
+  @protected
   double sse_decode_f_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat32();
+  }
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat64();
   }
 
   @protected
@@ -1168,10 +1093,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Int32List sse_decode_list_prim_i_32_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getInt32List(len_);
+  }
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  List<TerrainThreshold> sse_decode_list_terrain_threshold(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <TerrainThreshold>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_terrain_threshold(deserializer));
+    }
+    return ans_;
   }
 
   @protected
@@ -1186,11 +1132,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (int, int, int) sse_decode_record_u_8_u_8_u_8(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_u_8(deserializer);
+    var var_field1 = sse_decode_u_8(deserializer);
+    var var_field2 = sse_decode_u_8(deserializer);
+    return (var_field0, var_field1, var_field2);
+  }
+
+  @protected
   Size sse_decode_size(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_width = sse_decode_i_32(deserializer);
     var var_height = sse_decode_i_32(deserializer);
     return Size(width: var_width, height: var_height);
+  }
+
+  @protected
+  TerrainColors sse_decode_terrain_colors(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_thresholds = sse_decode_list_terrain_threshold(deserializer);
+    var var_fallback = sse_decode_record_u_8_u_8_u_8(deserializer);
+    return TerrainColors(thresholds: var_thresholds, fallback: var_fallback);
+  }
+
+  @protected
+  TerrainThreshold sse_decode_terrain_threshold(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_threshold = sse_decode_f_64(deserializer);
+    var var_r = sse_decode_u_8(deserializer);
+    var var_g = sse_decode_u_8(deserializer);
+    var var_b = sse_decode_u_8(deserializer);
+    return TerrainThreshold(
+      threshold: var_threshold,
+      r: var_r,
+      g: var_g,
+      b: var_b,
+    );
   }
 
   @protected
@@ -1203,6 +1181,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   int sse_decode_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint32();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -1223,9 +1207,47 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
+  WorldEvent sse_decode_world_event(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_x = sse_decode_i_32(deserializer);
+        var var_y = sse_decode_i_32(deserializer);
+        var var_width = sse_decode_u_32(deserializer);
+        var var_height = sse_decode_u_32(deserializer);
+        var var_seed = sse_decode_u_64(deserializer);
+        return WorldEvent_TerrainGenerated(
+          x: var_x,
+          y: var_y,
+          width: var_width,
+          height: var_height,
+          seed: var_seed,
+        );
+      case 1:
+        var var_temperature = sse_decode_f_32(deserializer);
+        var var_humidity = sse_decode_f_32(deserializer);
+        var var_windSpeed = sse_decode_f_32(deserializer);
+        var var_description = sse_decode_String(deserializer);
+        return WorldEvent_WeatherChanged(
+          temperature: var_temperature,
+          humidity: var_humidity,
+          windSpeed: var_windSpeed,
+          description: var_description,
+        );
+      case 2:
+        var var_regionName = sse_decode_String(deserializer);
+        var var_population = sse_decode_u_32(deserializer);
+        var var_hostile = sse_decode_bool(deserializer);
+        return WorldEvent_RegionEntered(
+          regionName: var_regionName,
+          population: var_population,
+          hostile: var_hostile,
+        );
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -1239,19 +1261,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    InferencePipeline self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as InferencePipelineImpl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
     RustAudioRecorder self,
     SseSerializer serializer,
@@ -1259,19 +1268,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as RustAudioRecorderImpl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    InferencePipeline self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as InferencePipelineImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
@@ -1291,19 +1287,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    InferencePipeline self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as InferencePipelineImpl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
     RustAudioRecorder self,
     SseSerializer serializer,
@@ -1311,19 +1294,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as RustAudioRecorderImpl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-    InferencePipeline self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as InferencePipelineImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
@@ -1382,9 +1352,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
   void sse_encode_box_autoadd_size(Size self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_size(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_terrain_colors(
+    TerrainColors self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_terrain_colors(self, serializer);
   }
 
   @protected
@@ -1394,9 +1379,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_city(City self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.name, serializer);
+    sse_encode_i_32(self.population, serializer);
+    sse_encode_f_32(self.area, serializer);
+    sse_encode_bool(self.isCapital, serializer);
+    sse_encode_list_prim_i_32_strict(self.districtPopulations, serializer);
+    sse_encode_list_prim_f_32_strict(self.districtAreas, serializer);
+  }
+
+  @protected
   void sse_encode_f_32(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat32(self);
+  }
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat64(self);
   }
 
   @protected
@@ -1416,6 +1418,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_prim_i_32_strict(
+    Int32List self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putInt32List(self);
+  }
+
+  @protected
   void sse_encode_list_prim_u_8_strict(
     Uint8List self,
     SseSerializer serializer,
@@ -1423,6 +1435,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
+  }
+
+  @protected
+  void sse_encode_list_terrain_threshold(
+    List<TerrainThreshold> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_terrain_threshold(item, serializer);
+    }
   }
 
   @protected
@@ -1436,10 +1460,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_record_u_8_u_8_u_8(
+    (int, int, int) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_8(self.$1, serializer);
+    sse_encode_u_8(self.$2, serializer);
+    sse_encode_u_8(self.$3, serializer);
+  }
+
+  @protected
   void sse_encode_size(Size self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.width, serializer);
     sse_encode_i_32(self.height, serializer);
+  }
+
+  @protected
+  void sse_encode_terrain_colors(TerrainColors self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_terrain_threshold(self.thresholds, serializer);
+    sse_encode_record_u_8_u_8_u_8(self.fallback, serializer);
+  }
+
+  @protected
+  void sse_encode_terrain_threshold(
+    TerrainThreshold self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.threshold, serializer);
+    sse_encode_u_8(self.r, serializer);
+    sse_encode_u_8(self.g, serializer);
+    sse_encode_u_8(self.b, serializer);
   }
 
   @protected
@@ -1452,6 +1506,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_u_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint32(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -1472,51 +1532,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
+  void sse_encode_world_event(WorldEvent self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
+    switch (self) {
+      case WorldEvent_TerrainGenerated(
+        x: final x,
+        y: final y,
+        width: final width,
+        height: final height,
+        seed: final seed,
+      ):
+        sse_encode_i_32(0, serializer);
+        sse_encode_i_32(x, serializer);
+        sse_encode_i_32(y, serializer);
+        sse_encode_u_32(width, serializer);
+        sse_encode_u_32(height, serializer);
+        sse_encode_u_64(seed, serializer);
+      case WorldEvent_WeatherChanged(
+        temperature: final temperature,
+        humidity: final humidity,
+        windSpeed: final windSpeed,
+        description: final description,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_f_32(temperature, serializer);
+        sse_encode_f_32(humidity, serializer);
+        sse_encode_f_32(windSpeed, serializer);
+        sse_encode_String(description, serializer);
+      case WorldEvent_RegionEntered(
+        regionName: final regionName,
+        population: final population,
+        hostile: final hostile,
+      ):
+        sse_encode_i_32(2, serializer);
+        sse_encode_String(regionName, serializer);
+        sse_encode_u_32(population, serializer);
+        sse_encode_bool(hostile, serializer);
+    }
   }
-}
-
-@sealed
-class InferencePipelineImpl extends RustOpaque implements InferencePipeline {
-  // Not to be used by end users
-  InferencePipelineImpl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  InferencePipelineImpl.frbInternalSseDecode(
-    BigInt ptr,
-    int externalSizeOnNative,
-  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_InferencePipeline,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_InferencePipeline,
-    rustArcDecrementStrongCountPtr: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_InferencePipelinePtr,
-  );
-
-  Size get imageSize => RustLib.instance.api
-      .crateApiAudioMelSpectrogramInferencePipelineAutoAccessorGetImageSize(
-        that: this,
-      );
-
-  set imageSize(Size imageSize) => RustLib.instance.api
-      .crateApiAudioMelSpectrogramInferencePipelineAutoAccessorSetImageSize(
-        that: this,
-        imageSize: imageSize,
-      );
-
-  Stream<Uint8List> start() => RustLib.instance.api
-      .crateApiAudioMelSpectrogramInferencePipelineStart(that: this);
-
-  Future<void> stop() => RustLib.instance.api
-      .crateApiAudioMelSpectrogramInferencePipelineStop(that: this);
 }
 
 @sealed

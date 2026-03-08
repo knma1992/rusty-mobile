@@ -5,31 +5,37 @@
 
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-
-// These functions are ignored because they are not marked as `pub`: `terrain_color`
-// These types are ignored because they are neither used by any `pub` functions nor (for structs and enums) marked `#[frb(unignore)]`: `Point`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `clone`, `clone`, `fmt`, `fmt`
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'simple.freezed.dart';
 
 String greet({required String name}) =>
     RustLib.instance.api.crateApiSimpleGreet(name: name);
 
-Stream<Uint8List> terrainStream({required Size imageSize}) =>
-    RustLib.instance.api.crateApiSimpleTerrainStream(imageSize: imageSize);
+@freezed
+sealed class WorldEvent with _$WorldEvent {
+  const WorldEvent._();
 
-class Size {
-  final int width;
-  final int height;
+  /// A new terrain chunk was generated
+  const factory WorldEvent.terrainGenerated({
+    required int x,
+    required int y,
+    required int width,
+    required int height,
+    required BigInt seed,
+  }) = WorldEvent_TerrainGenerated;
 
-  const Size({required this.width, required this.height});
+  /// A weather system changed
+  const factory WorldEvent.weatherChanged({
+    required double temperature,
+    required double humidity,
+    required double windSpeed,
+    required String description,
+  }) = WorldEvent_WeatherChanged;
 
-  @override
-  int get hashCode => width.hashCode ^ height.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Size &&
-          runtimeType == other.runtimeType &&
-          width == other.width &&
-          height == other.height;
+  /// The player moved to a new region
+  const factory WorldEvent.regionEntered({
+    required String regionName,
+    required int population,
+    required bool hostile,
+  }) = WorldEvent_RegionEntered;
 }

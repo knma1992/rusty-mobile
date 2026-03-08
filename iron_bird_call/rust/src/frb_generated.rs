@@ -25,7 +25,6 @@
 
 // Section: imports
 
-use crate::api::audio::mel_spectrogram::*;
 use crate::api::audio::rust_audio_recorder::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
@@ -39,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 816536775;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 175531572;
 
 // Section: executor
 
@@ -47,253 +46,6 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 // Section: wire_funcs
 
-fn wire__crate__api__audio__mel_spectrogram__InferencePipeline_auto_accessor_get_image_size_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "InferencePipeline_auto_accessor_get_image_size",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>,
-            >>::sse_decode(&mut deserializer);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, false,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
-                        _ => unreachable!(),
-                    }
-                }
-                let api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok(api_that_guard.image_size.clone())?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__api__audio__mel_spectrogram__InferencePipeline_auto_accessor_set_image_size_impl(
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "InferencePipeline_auto_accessor_set_image_size",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>,
-            >>::sse_decode(&mut deserializer);
-            let api_image_size = <crate::api::simple::Size>::sse_decode(&mut deserializer);
-            deserializer.end();
-            transform_result_sse::<_, ()>((move || {
-                let mut api_that_guard = None;
-                let decode_indices_ =
-                    flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
-                        flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                            &api_that, 0, true,
-                        ),
-                    ]);
-                for i in decode_indices_ {
-                    match i {
-                        0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
-                        _ => unreachable!(),
-                    }
-                }
-                let mut api_that_guard = api_that_guard.unwrap();
-                let output_ok = Result::<_, ()>::Ok({
-                    {
-                        api_that_guard.image_size = api_image_size;
-                    };
-                })?;
-                Ok(output_ok)
-            })())
-        },
-    )
-}
-fn wire__crate__api__audio__mel_spectrogram__InferencePipeline_new_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "InferencePipeline_new",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_image_size = <crate::api::simple::Size>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                    (move || {
-                        let output_ok = crate::api::audio::mel_spectrogram::InferencePipeline::new(
-                            api_image_size,
-                        )?;
-                        Ok(output_ok)
-                    })(),
-                )
-            }
-        },
-    )
-}
-fn wire__crate__api__audio__mel_spectrogram__InferencePipeline_start_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "InferencePipeline_start",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>,
-            >>::sse_decode(&mut deserializer);
-            let api_sink =
-                <StreamSink<Vec<u8>, flutter_rust_bridge::for_generated::SseCodec>>::sse_decode(
-                    &mut deserializer,
-                );
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                    (move || {
-                        let mut api_that_guard = None;
-                        let decode_indices_ =
-                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
-                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                    &api_that, 0, true,
-                                )],
-                            );
-                        for i in decode_indices_ {
-                            match i {
-                                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
-                                _ => unreachable!(),
-                            }
-                        }
-                        let mut api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::audio::mel_spectrogram::InferencePipeline::start(
-                                &mut *api_that_guard,
-                                api_sink,
-                            )?;
-                        Ok(output_ok)
-                    })(),
-                )
-            }
-        },
-    )
-}
-fn wire__crate__api__audio__mel_spectrogram__InferencePipeline_stop_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "InferencePipeline_stop",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_that = <RustOpaqueMoi<
-                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>,
-            >>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
-                    (move || {
-                        let mut api_that_guard = None;
-                        let decode_indices_ =
-                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
-                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
-                                    &api_that, 0, true,
-                                )],
-                            );
-                        for i in decode_indices_ {
-                            match i {
-                                0 => api_that_guard = Some(api_that.lockable_decode_sync_ref_mut()),
-                                _ => unreachable!(),
-                            }
-                        }
-                        let mut api_that_guard = api_that_guard.unwrap();
-                        let output_ok =
-                            crate::api::audio::mel_spectrogram::InferencePipeline::stop(
-                                &mut *api_that_guard,
-                            )?;
-                        Ok(output_ok)
-                    })(),
-                )
-            }
-        },
-    )
-}
 fn wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get__buffer_size_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -623,7 +375,7 @@ fn wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_
     rust_vec_len_: i32,
     data_len_: i32,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "RustAudioRecorder_start_stream", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "RustAudioRecorder_start_stream", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
             let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
             let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RustAudioRecorder>>>::sse_decode(&mut deserializer);
@@ -648,7 +400,7 @@ fn wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_
     rust_vec_len_: i32,
     data_len_: i32,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "RustAudioRecorder_start_stream_waveform", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec,_,_>(flutter_rust_bridge::for_generated::TaskInfo{ debug_name: "RustAudioRecorder_start_stream_waveform", port: Some(port_), mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal }, move || { 
             let message = unsafe { flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(ptr_, rust_vec_len_, data_len_) };
             let mut deserializer = flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_that = <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RustAudioRecorder>>>::sse_decode(&mut deserializer);
@@ -723,6 +475,38 @@ fn wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_stop_impl(
         },
     )
 }
+fn wire__crate__api__city__get_karlsruhe_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "get_karlsruhe",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(crate::api::city::get_karlsruhe())?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__api__simple__greet_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -787,7 +571,40 @@ fn wire__crate__api__simple__init_app_impl(
         },
     )
 }
-fn wire__crate__api__simple__terrain_stream_impl(
+fn wire__crate__api__terrain__terrain_colors_default_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "terrain_colors_default",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::api::terrain::TerrainColors::default())?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__terrain__terrain_stream_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -809,7 +626,8 @@ fn wire__crate__api__simple__terrain_stream_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_image_size = <crate::api::simple::Size>::sse_decode(&mut deserializer);
+            let api_image_size = <crate::api::terrain::Size>::sse_decode(&mut deserializer);
+            let api_colors = <crate::api::terrain::TerrainColors>::sse_decode(&mut deserializer);
             let api_sink =
                 <StreamSink<Vec<u8>, flutter_rust_bridge::for_generated::SseCodec>>::sse_decode(
                     &mut deserializer,
@@ -818,8 +636,11 @@ fn wire__crate__api__simple__terrain_stream_impl(
             move |context| {
                 transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
                     (move || {
-                        let output_ok =
-                            crate::api::simple::terrain_stream(api_image_size, api_sink)?;
+                        let output_ok = crate::api::terrain::terrain_stream(
+                            api_image_size,
+                            api_colors,
+                            api_sink,
+                        )?;
                         Ok(output_ok)
                     })(),
                 )
@@ -830,9 +651,6 @@ fn wire__crate__api__simple__terrain_stream_impl(
 
 // Section: related_funcs
 
-flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
-    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>
-);
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RustAudioRecorder>
 );
@@ -847,16 +665,6 @@ impl SseDecode for flutter_rust_bridge::for_generated::anyhow::Error {
     }
 }
 
-impl SseDecode for InferencePipeline {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>,
-        >>::sse_decode(deserializer);
-        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
-    }
-}
-
 impl SseDecode for RustAudioRecorder {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -864,16 +672,6 @@ impl SseDecode for RustAudioRecorder {
             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RustAudioRecorder>,
         >>::sse_decode(deserializer);
         return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
-    }
-}
-
-impl SseDecode
-    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut inner = <usize>::sse_decode(deserializer);
-        return decode_rust_opaque_moi(inner);
     }
 }
 
@@ -911,10 +709,44 @@ impl SseDecode for String {
     }
 }
 
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
+    }
+}
+
+impl SseDecode for crate::api::city::City {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_population = <i32>::sse_decode(deserializer);
+        let mut var_area = <f32>::sse_decode(deserializer);
+        let mut var_isCapital = <bool>::sse_decode(deserializer);
+        let mut var_districtPopulations = <Vec<i32>>::sse_decode(deserializer);
+        let mut var_districtAreas = <Vec<f32>>::sse_decode(deserializer);
+        return crate::api::city::City {
+            name: var_name,
+            population: var_population,
+            area: var_area,
+            is_capital: var_isCapital,
+            district_populations: var_districtPopulations,
+            district_areas: var_districtAreas,
+        };
+    }
+}
+
 impl SseDecode for f32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         deserializer.cursor.read_f32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_f64::<NativeEndian>().unwrap()
     }
 }
 
@@ -937,6 +769,18 @@ impl SseDecode for Vec<f32> {
     }
 }
 
+impl SseDecode for Vec<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<i32>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -944,6 +788,20 @@ impl SseDecode for Vec<u8> {
         let mut ans_ = vec![];
         for idx_ in 0..len_ {
             ans_.push(<u8>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::terrain::TerrainThreshold> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::terrain::TerrainThreshold>::sse_decode(
+                deserializer,
+            ));
         }
         return ans_;
     }
@@ -960,14 +818,53 @@ impl SseDecode for Option<u32> {
     }
 }
 
-impl SseDecode for crate::api::simple::Size {
+impl SseDecode for (u8, u8, u8) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_field0 = <u8>::sse_decode(deserializer);
+        let mut var_field1 = <u8>::sse_decode(deserializer);
+        let mut var_field2 = <u8>::sse_decode(deserializer);
+        return (var_field0, var_field1, var_field2);
+    }
+}
+
+impl SseDecode for crate::api::terrain::Size {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_width = <i32>::sse_decode(deserializer);
         let mut var_height = <i32>::sse_decode(deserializer);
-        return crate::api::simple::Size {
+        return crate::api::terrain::Size {
             width: var_width,
             height: var_height,
+        };
+    }
+}
+
+impl SseDecode for crate::api::terrain::TerrainColors {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_thresholds =
+            <Vec<crate::api::terrain::TerrainThreshold>>::sse_decode(deserializer);
+        let mut var_fallback = <(u8, u8, u8)>::sse_decode(deserializer);
+        return crate::api::terrain::TerrainColors {
+            thresholds: var_thresholds,
+            fallback: var_fallback,
+        };
+    }
+}
+
+impl SseDecode for crate::api::terrain::TerrainThreshold {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_threshold = <f64>::sse_decode(deserializer);
+        let mut var_r = <u8>::sse_decode(deserializer);
+        let mut var_g = <u8>::sse_decode(deserializer);
+        let mut var_b = <u8>::sse_decode(deserializer);
+        return crate::api::terrain::TerrainThreshold {
+            threshold: var_threshold,
+            r: var_r,
+            g: var_g,
+            b: var_b,
         };
     }
 }
@@ -983,6 +880,13 @@ impl SseDecode for u32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         deserializer.cursor.read_u32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap()
     }
 }
 
@@ -1005,10 +909,51 @@ impl SseDecode for usize {
     }
 }
 
-impl SseDecode for bool {
+impl SseDecode for crate::api::simple::WorldEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_x = <i32>::sse_decode(deserializer);
+                let mut var_y = <i32>::sse_decode(deserializer);
+                let mut var_width = <u32>::sse_decode(deserializer);
+                let mut var_height = <u32>::sse_decode(deserializer);
+                let mut var_seed = <u64>::sse_decode(deserializer);
+                return crate::api::simple::WorldEvent::TerrainGenerated {
+                    x: var_x,
+                    y: var_y,
+                    width: var_width,
+                    height: var_height,
+                    seed: var_seed,
+                };
+            }
+            1 => {
+                let mut var_temperature = <f32>::sse_decode(deserializer);
+                let mut var_humidity = <f32>::sse_decode(deserializer);
+                let mut var_windSpeed = <f32>::sse_decode(deserializer);
+                let mut var_description = <String>::sse_decode(deserializer);
+                return crate::api::simple::WorldEvent::WeatherChanged {
+                    temperature: var_temperature,
+                    humidity: var_humidity,
+                    wind_speed: var_windSpeed,
+                    description: var_description,
+                };
+            }
+            2 => {
+                let mut var_regionName = <String>::sse_decode(deserializer);
+                let mut var_population = <u32>::sse_decode(deserializer);
+                let mut var_hostile = <bool>::sse_decode(deserializer);
+                return crate::api::simple::WorldEvent::RegionEntered {
+                    region_name: var_regionName,
+                    population: var_population,
+                    hostile: var_hostile,
+                };
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -1021,14 +966,13 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-                        3 => wire__crate__api__audio__mel_spectrogram__InferencePipeline_new_impl(port, ptr, rust_vec_len, data_len),
-4 => wire__crate__api__audio__mel_spectrogram__InferencePipeline_start_impl(port, ptr, rust_vec_len, data_len),
-5 => wire__crate__api__audio__mel_spectrogram__InferencePipeline_stop_impl(port, ptr, rust_vec_len, data_len),
-13 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_impl(port, ptr, rust_vec_len, data_len),
-14 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_waveform_impl(port, ptr, rust_vec_len, data_len),
-15 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_stop_impl(port, ptr, rust_vec_len, data_len),
-17 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-18 => wire__crate__api__simple__terrain_stream_impl(port, ptr, rust_vec_len, data_len),
+                        8 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_impl(port, ptr, rust_vec_len, data_len),
+9 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_start_stream_waveform_impl(port, ptr, rust_vec_len, data_len),
+10 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_stop_impl(port, ptr, rust_vec_len, data_len),
+11 => wire__crate__api__city__get_karlsruhe_impl(port, ptr, rust_vec_len, data_len),
+13 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+14 => wire__crate__api__terrain__terrain_colors_default_impl(port, ptr, rust_vec_len, data_len),
+15 => wire__crate__api__terrain__terrain_stream_impl(port, ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
@@ -1041,36 +985,19 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-                        1 => wire__crate__api__audio__mel_spectrogram__InferencePipeline_auto_accessor_get_image_size_impl(ptr, rust_vec_len, data_len),
-2 => wire__crate__api__audio__mel_spectrogram__InferencePipeline_auto_accessor_set_image_size_impl(ptr, rust_vec_len, data_len),
-6 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get__buffer_size_impl(ptr, rust_vec_len, data_len),
-7 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get_channels_impl(ptr, rust_vec_len, data_len),
-8 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get_sample_rate_impl(ptr, rust_vec_len, data_len),
-9 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set__buffer_size_impl(ptr, rust_vec_len, data_len),
-10 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set_channels_impl(ptr, rust_vec_len, data_len),
-11 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set_sample_rate_impl(ptr, rust_vec_len, data_len),
-12 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_new_impl(ptr, rust_vec_len, data_len),
-16 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+                        1 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get__buffer_size_impl(ptr, rust_vec_len, data_len),
+2 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get_channels_impl(ptr, rust_vec_len, data_len),
+3 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_get_sample_rate_impl(ptr, rust_vec_len, data_len),
+4 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set__buffer_size_impl(ptr, rust_vec_len, data_len),
+5 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set_channels_impl(ptr, rust_vec_len, data_len),
+6 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_auto_accessor_set_sample_rate_impl(ptr, rust_vec_len, data_len),
+7 => wire__crate__api__audio__rust_audio_recorder__RustAudioRecorder_new_impl(ptr, rust_vec_len, data_len),
+12 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
 
 // Section: rust2dart
-
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for FrbWrapper<InferencePipeline> {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
-            .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<InferencePipeline> {}
-
-impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<InferencePipeline>> for InferencePipeline {
-    fn into_into_dart(self) -> FrbWrapper<InferencePipeline> {
-        self.into()
-    }
-}
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<RustAudioRecorder> {
@@ -1088,7 +1015,27 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<RustAudioRecorder>> for RustAu
 }
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::simple::Size {
+impl flutter_rust_bridge::IntoDart for crate::api::city::City {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.name.into_into_dart().into_dart(),
+            self.population.into_into_dart().into_dart(),
+            self.area.into_into_dart().into_dart(),
+            self.is_capital.into_into_dart().into_dart(),
+            self.district_populations.into_into_dart().into_dart(),
+            self.district_areas.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::city::City {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::city::City> for crate::api::city::City {
+    fn into_into_dart(self) -> crate::api::city::City {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::terrain::Size {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.width.into_into_dart().into_dart(),
@@ -1097,9 +1044,113 @@ impl flutter_rust_bridge::IntoDart for crate::api::simple::Size {
         .into_dart()
     }
 }
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::simple::Size {}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::simple::Size> for crate::api::simple::Size {
-    fn into_into_dart(self) -> crate::api::simple::Size {
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::terrain::Size {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::terrain::Size> for crate::api::terrain::Size {
+    fn into_into_dart(self) -> crate::api::terrain::Size {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::terrain::TerrainColors {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.thresholds.into_into_dart().into_dart(),
+            self.fallback.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::terrain::TerrainColors
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::terrain::TerrainColors>
+    for crate::api::terrain::TerrainColors
+{
+    fn into_into_dart(self) -> crate::api::terrain::TerrainColors {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::terrain::TerrainThreshold {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.threshold.into_into_dart().into_dart(),
+            self.r.into_into_dart().into_dart(),
+            self.g.into_into_dart().into_dart(),
+            self.b.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::terrain::TerrainThreshold
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::terrain::TerrainThreshold>
+    for crate::api::terrain::TerrainThreshold
+{
+    fn into_into_dart(self) -> crate::api::terrain::TerrainThreshold {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::simple::WorldEvent {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::api::simple::WorldEvent::TerrainGenerated {
+                x,
+                y,
+                width,
+                height,
+                seed,
+            } => [
+                0.into_dart(),
+                x.into_into_dart().into_dart(),
+                y.into_into_dart().into_dart(),
+                width.into_into_dart().into_dart(),
+                height.into_into_dart().into_dart(),
+                seed.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::simple::WorldEvent::WeatherChanged {
+                temperature,
+                humidity,
+                wind_speed,
+                description,
+            } => [
+                1.into_dart(),
+                temperature.into_into_dart().into_dart(),
+                humidity.into_into_dart().into_dart(),
+                wind_speed.into_into_dart().into_dart(),
+                description.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::simple::WorldEvent::RegionEntered {
+                region_name,
+                population,
+                hostile,
+            } => [
+                2.into_dart(),
+                region_name.into_into_dart().into_dart(),
+                population.into_into_dart().into_dart(),
+                hostile.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::simple::WorldEvent
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::simple::WorldEvent>
+    for crate::api::simple::WorldEvent
+{
+    fn into_into_dart(self) -> crate::api::simple::WorldEvent {
         self
     }
 }
@@ -1111,28 +1162,10 @@ impl SseEncode for flutter_rust_bridge::for_generated::anyhow::Error {
     }
 }
 
-impl SseEncode for InferencePipeline {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
-    }
-}
-
 impl SseEncode for RustAudioRecorder {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<RustAudioRecorder>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
-    }
-}
-
-impl SseEncode
-    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>
-{
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        let (ptr, size) = self.sse_encode_raw();
-        <usize>::sse_encode(ptr, serializer);
-        <i32>::sse_encode(size, serializer);
     }
 }
 
@@ -1168,10 +1201,36 @@ impl SseEncode for String {
     }
 }
 
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::city::City {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.name, serializer);
+        <i32>::sse_encode(self.population, serializer);
+        <f32>::sse_encode(self.area, serializer);
+        <bool>::sse_encode(self.is_capital, serializer);
+        <Vec<i32>>::sse_encode(self.district_populations, serializer);
+        <Vec<f32>>::sse_encode(self.district_areas, serializer);
+    }
+}
+
 impl SseEncode for f32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         serializer.cursor.write_f32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_f64::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -1192,12 +1251,32 @@ impl SseEncode for Vec<f32> {
     }
 }
 
+impl SseEncode for Vec<i32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <i32>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <u8>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::terrain::TerrainThreshold> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::terrain::TerrainThreshold>::sse_encode(item, serializer);
         }
     }
 }
@@ -1212,11 +1291,38 @@ impl SseEncode for Option<u32> {
     }
 }
 
-impl SseEncode for crate::api::simple::Size {
+impl SseEncode for (u8, u8, u8) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u8>::sse_encode(self.0, serializer);
+        <u8>::sse_encode(self.1, serializer);
+        <u8>::sse_encode(self.2, serializer);
+    }
+}
+
+impl SseEncode for crate::api::terrain::Size {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.width, serializer);
         <i32>::sse_encode(self.height, serializer);
+    }
+}
+
+impl SseEncode for crate::api::terrain::TerrainColors {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::api::terrain::TerrainThreshold>>::sse_encode(self.thresholds, serializer);
+        <(u8, u8, u8)>::sse_encode(self.fallback, serializer);
+    }
+}
+
+impl SseEncode for crate::api::terrain::TerrainThreshold {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.threshold, serializer);
+        <u8>::sse_encode(self.r, serializer);
+        <u8>::sse_encode(self.g, serializer);
+        <u8>::sse_encode(self.b, serializer);
     }
 }
 
@@ -1231,6 +1337,13 @@ impl SseEncode for u32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         serializer.cursor.write_u32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u64::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -1256,10 +1369,50 @@ impl SseEncode for usize {
     }
 }
 
-impl SseEncode for bool {
+impl SseEncode for crate::api::simple::WorldEvent {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
+        match self {
+            crate::api::simple::WorldEvent::TerrainGenerated {
+                x,
+                y,
+                width,
+                height,
+                seed,
+            } => {
+                <i32>::sse_encode(0, serializer);
+                <i32>::sse_encode(x, serializer);
+                <i32>::sse_encode(y, serializer);
+                <u32>::sse_encode(width, serializer);
+                <u32>::sse_encode(height, serializer);
+                <u64>::sse_encode(seed, serializer);
+            }
+            crate::api::simple::WorldEvent::WeatherChanged {
+                temperature,
+                humidity,
+                wind_speed,
+                description,
+            } => {
+                <i32>::sse_encode(1, serializer);
+                <f32>::sse_encode(temperature, serializer);
+                <f32>::sse_encode(humidity, serializer);
+                <f32>::sse_encode(wind_speed, serializer);
+                <String>::sse_encode(description, serializer);
+            }
+            crate::api::simple::WorldEvent::RegionEntered {
+                region_name,
+                population,
+                hostile,
+            } => {
+                <i32>::sse_encode(2, serializer);
+                <String>::sse_encode(region_name, serializer);
+                <u32>::sse_encode(population, serializer);
+                <bool>::sse_encode(hostile, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
     }
 }
 
@@ -1271,7 +1424,6 @@ mod io {
     // Section: imports
 
     use super::*;
-    use crate::api::audio::mel_spectrogram::*;
     use crate::api::audio::rust_audio_recorder::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -1282,20 +1434,6 @@ mod io {
     // Section: boilerplate
 
     flutter_rust_bridge::frb_generated_boilerplate_io!();
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_iron_bird_call_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>::increment_strong_count(ptr as _);
-    }
-
-    #[unsafe(no_mangle)]
-    pub extern "C" fn frbgen_iron_bird_call_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>::decrement_strong_count(ptr as _);
-    }
 
     #[unsafe(no_mangle)]
     pub extern "C" fn frbgen_iron_bird_call_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(
@@ -1323,7 +1461,6 @@ mod web {
     // Section: imports
 
     use super::*;
-    use crate::api::audio::mel_spectrogram::*;
     use crate::api::audio::rust_audio_recorder::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -1336,20 +1473,6 @@ mod web {
     // Section: boilerplate
 
     flutter_rust_bridge::frb_generated_boilerplate_web!();
-
-    #[wasm_bindgen]
-    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>::increment_strong_count(ptr as _);
-    }
-
-    #[wasm_bindgen]
-    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerInferencePipeline(
-        ptr: *const std::ffi::c_void,
-    ) {
-        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<InferencePipeline>>::decrement_strong_count(ptr as _);
-    }
 
     #[wasm_bindgen]
     pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRustAudioRecorder(

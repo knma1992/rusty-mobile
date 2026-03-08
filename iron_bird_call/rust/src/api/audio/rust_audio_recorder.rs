@@ -142,7 +142,7 @@ impl RustAudioRecorder {
                             return;
                         }
                     },
-                    |err| {},
+                    |_err| {},
                     None,
                 )?;
 
@@ -159,7 +159,7 @@ impl RustAudioRecorder {
                 Ok(())
             }
 
-            if let Err(err) = run_stream(device, config, stream_rx, audio_tx) {}
+            if let Err(_err) = run_stream(device, config, stream_rx, audio_tx) {}
         });
 
         *self.control_tx.lock().unwrap() = Some(stream_tx);
@@ -170,7 +170,7 @@ impl RustAudioRecorder {
         if let Some(tx) = self.control_tx.lock().unwrap().take() {
             match tx.send(StreamCommand::Stop) {
                 Ok(_) => {}
-                Err(e) => {}
+                Err(_) => {}
             }
         } else {
         }
