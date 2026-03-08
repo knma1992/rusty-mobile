@@ -26,7 +26,7 @@ class MarkdownWidget extends ConsumerWidget {
       data: (data) => MediaQuery(
         data: MediaQuery.of(
           context,
-        ).copyWith(textScaler: TextScaler.linear(_markdownTextScale)),
+        ).copyWith(textScaler: const TextScaler.linear(_markdownTextScale)),
         child: MarkdownBlock(config: markdownConfig, data: data),
       ),
     );

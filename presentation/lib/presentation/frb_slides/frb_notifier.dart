@@ -5,6 +5,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:iron_bird_call/iron_bird_call.dart' as rust_api;
 import 'package:presentation/presentation/frb_slides/frb_data.dart';
+import 'package:presentation/presentation/frb_slides/terrain_colors.dart';
+import 'package:presentation/presentation/frb_slides/waveform.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'frb_notifier.g.dart';
@@ -27,6 +29,7 @@ class FrbNotifier extends _$FrbNotifier {
       image: null,
       serviceState: ServiceState.idle,
       audio: Float32List.fromList([]),
+      waveformStyle: WaveformStyle.normal,
     );
   }
 
@@ -63,6 +66,7 @@ class FrbNotifier extends _$FrbNotifier {
 
     final stream = rust_api.terrainStream(
       imageSize: const rust_api.Size(width: width, height: height),
+      colors: terrainColors,
     );
 
     bool _decoding = false;
@@ -96,5 +100,9 @@ class FrbNotifier extends _$FrbNotifier {
     await recorder?.stop();
     _subscription = null;
     state = state.copyWith(serviceState: ServiceState.idle, image: null);
+  }
+
+  void changeWavefromStyle(WaveformStyle waveformStyle) {
+    state = state.copyWith(waveformStyle: waveformStyle);
   }
 }

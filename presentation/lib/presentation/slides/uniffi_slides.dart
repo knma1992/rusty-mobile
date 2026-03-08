@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/presentation/additional_widgets/alert_text.dart';
-import 'package:presentation/presentation/additional_widgets/bullet_list.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
+import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/styled_text.dart';
 
 // constants/headlines.dart
 const uniffiHeadline = Headline(

@@ -2,10 +2,11 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:presentation/presentation/additional_widgets/alert_text.dart';
-import 'package:presentation/presentation/additional_widgets/bullet_list.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
+import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/styled_text.dart';
+import 'package:presentation/presentation/frb_slides/frb_examples.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/waveform.dart';
 import 'package:presentation/util/context_extensions.dart';
@@ -15,10 +16,11 @@ const frbHeadline = Headline(highlight: "FRB", rest: ': Flutter Rust Bridge');
 
 const frbSlides = [
   FrbHint(),
-  TerrainScreen(),
   FrbOverview(),
   FrbSetup(),
+  ...frbExampleSlides,
   WaveformScreen(),
+  TerrainScreen(),
 ];
 
 class FrbHint extends StatelessWidget {
@@ -58,7 +60,6 @@ class FrbOverview extends StatelessWidget {
             "Structs get translated in to data classes and enum to sealed classes.",
           ],
         ),
-
         GestureDetector(
           onTap: () async {
             launchUrl(
@@ -109,37 +110,44 @@ class TerrainScreen extends ConsumerWidget {
     return Column(
       spacing: 10,
       mainAxisAlignment: .center,
-      crossAxisAlignment: .start,
+      crossAxisAlignment: .center,
       children: [
+        const Align(alignment: .centerLeft, child: frbHeadline),
+        const BulletItem("Terrain"),
         if (serviceState.terrainRunning) ...[
-          frbHeadline,
           const Expanded(
             child: Center(
               child: AspectRatio(aspectRatio: 1, child: TerrainImage()),
             ),
           ),
+        ] else ...[
+          const Spacer(),
+          Center(
+            child: Image.asset(
+              'assets/images/flutter_meme.jpg',
+              height: 450,
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          const Spacer(),
         ],
 
-        Row(
-          mainAxisAlignment: .center,
-          children: [
-            if (serviceState.terrainRunning)
-              TextButton(
-                onPressed: () {
-                  ref.read(frbProvider.notifier).stop();
-                },
-                child: Text("Stop", style: context.textTheme.titleLarge),
-              ),
+        if (serviceState.terrainRunning)
+          TextButton(
+            onPressed: () {
+              ref.read(frbProvider.notifier).stop();
+            },
+            child: Text("Stop", style: context.textTheme.titleLarge),
+          ),
 
-            if (serviceState.isIdle)
-              TextButton(
-                onPressed: () {
-                  ref.read(frbProvider.notifier).startTerrainStream();
-                },
-                child: Text("Start", style: context.textTheme.titleLarge),
-              ),
-          ],
-        ),
+        if (serviceState.isIdle)
+          TextButton(
+            onPressed: () {
+              ref.read(frbProvider.notifier).startTerrainStream();
+            },
+            child: Text("Start", style: context.textTheme.titleLarge),
+          ),
+        const SizedBox(height: 48),
       ],
     );
   }

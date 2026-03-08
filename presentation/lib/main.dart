@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iron_bird_call/iron_bird_call.dart' as rust_api;
-import 'package:presentation/presentation/additional_widgets/presentation_scaffold.dart';
+import 'package:presentation/presentation/default/blank_canvas.dart';
 import 'package:presentation/presentation/frb_slides/frb_slides.dart';
 import 'package:presentation/presentation/slides/jni_slides.dart';
 import 'package:presentation/presentation/slides/title.dart';

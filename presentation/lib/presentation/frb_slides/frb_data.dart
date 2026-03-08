@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:presentation/presentation/frb_slides/waveform.dart';
 
 part 'frb_data.freezed.dart';
 
@@ -23,5 +24,6 @@ abstract class FrbData with _$FrbData {
     required ui.Image? image,
     required ServiceState serviceState,
     required Float32List audio,
+    required WaveformStyle waveformStyle,
   }) = _FrbData;
 }

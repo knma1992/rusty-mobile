@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation/additional_widgets/alert_text.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
+import 'package:presentation/presentation/additional_widgets/styled_text.dart';
 
 class TitleSlide extends StatelessWidget {
   const TitleSlide({super.key});

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FrbData {
 
- ui.Image? get image; ServiceState get serviceState; Float32List get audio;
+ ui.Image? get image; ServiceState get serviceState; Float32List get audio; WaveformStyle get waveformStyle;
 /// Create a copy of FrbData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $FrbDataCopyWith<FrbData> get copyWith => _$FrbDataCopyWithImpl<FrbData>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FrbData&&(identical(other.image, image) || other.image == image)&&(identical(other.serviceState, serviceState) || other.serviceState == serviceState)&&const DeepCollectionEquality().equals(other.audio, audio));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FrbData&&(identical(other.image, image) || other.image == image)&&(identical(other.serviceState, serviceState) || other.serviceState == serviceState)&&const DeepCollectionEquality().equals(other.audio, audio)&&(identical(other.waveformStyle, waveformStyle) || other.waveformStyle == waveformStyle));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,image,serviceState,const DeepCollectionEquality().hash(audio));
+int get hashCode => Object.hash(runtimeType,image,serviceState,const DeepCollectionEquality().hash(audio),waveformStyle);
 
 @override
 String toString() {
-  return 'FrbData(image: $image, serviceState: $serviceState, audio: $audio)';
+  return 'FrbData(image: $image, serviceState: $serviceState, audio: $audio, waveformStyle: $waveformStyle)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $FrbDataCopyWith<$Res>  {
   factory $FrbDataCopyWith(FrbData value, $Res Function(FrbData) _then) = _$FrbDataCopyWithImpl;
 @useResult
 $Res call({
- ui.Image? image, ServiceState serviceState, Float32List audio
+ ui.Image? image, ServiceState serviceState, Float32List audio, WaveformStyle waveformStyle
 });
 
 
@@ -62,12 +62,13 @@ class _$FrbDataCopyWithImpl<$Res>
 
 /// Create a copy of FrbData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,Object? serviceState = null,Object? audio = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? image = freezed,Object? serviceState = null,Object? audio = null,Object? waveformStyle = null,}) {
   return _then(_self.copyWith(
 image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ui.Image?,serviceState: null == serviceState ? _self.serviceState : serviceState // ignore: cast_nullable_to_non_nullable
 as ServiceState,audio: null == audio ? _self.audio : audio // ignore: cast_nullable_to_non_nullable
-as Float32List,
+as Float32List,waveformStyle: null == waveformStyle ? _self.waveformStyle : waveformStyle // ignore: cast_nullable_to_non_nullable
+as WaveformStyle,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ui.Image? image,  ServiceState serviceState,  Float32List audio)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ui.Image? image,  ServiceState serviceState,  Float32List audio,  WaveformStyle waveformStyle)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FrbData() when $default != null:
-return $default(_that.image,_that.serviceState,_that.audio);case _:
+return $default(_that.image,_that.serviceState,_that.audio,_that.waveformStyle);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.image,_that.serviceState,_that.audio);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ui.Image? image,  ServiceState serviceState,  Float32List audio)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ui.Image? image,  ServiceState serviceState,  Float32List audio,  WaveformStyle waveformStyle)  $default,) {final _that = this;
 switch (_that) {
 case _FrbData():
-return $default(_that.image,_that.serviceState,_that.audio);case _:
+return $default(_that.image,_that.serviceState,_that.audio,_that.waveformStyle);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.image,_that.serviceState,_that.audio);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ui.Image? image,  ServiceState serviceState,  Float32List audio)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ui.Image? image,  ServiceState serviceState,  Float32List audio,  WaveformStyle waveformStyle)?  $default,) {final _that = this;
 switch (_that) {
 case _FrbData() when $default != null:
-return $default(_that.image,_that.serviceState,_that.audio);case _:
+return $default(_that.image,_that.serviceState,_that.audio,_that.waveformStyle);case _:
   return null;
 
 }
@@ -208,12 +209,13 @@ return $default(_that.image,_that.serviceState,_that.audio);case _:
 
 
 class _FrbData implements FrbData {
-  const _FrbData({required this.image, required this.serviceState, required this.audio});
+  const _FrbData({required this.image, required this.serviceState, required this.audio, required this.waveformStyle});
   
 
 @override final  ui.Image? image;
 @override final  ServiceState serviceState;
 @override final  Float32List audio;
+@override final  WaveformStyle waveformStyle;
 
 /// Create a copy of FrbData
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +227,16 @@ _$FrbDataCopyWith<_FrbData> get copyWith => __$FrbDataCopyWithImpl<_FrbData>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FrbData&&(identical(other.image, image) || other.image == image)&&(identical(other.serviceState, serviceState) || other.serviceState == serviceState)&&const DeepCollectionEquality().equals(other.audio, audio));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FrbData&&(identical(other.image, image) || other.image == image)&&(identical(other.serviceState, serviceState) || other.serviceState == serviceState)&&const DeepCollectionEquality().equals(other.audio, audio)&&(identical(other.waveformStyle, waveformStyle) || other.waveformStyle == waveformStyle));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,image,serviceState,const DeepCollectionEquality().hash(audio));
+int get hashCode => Object.hash(runtimeType,image,serviceState,const DeepCollectionEquality().hash(audio),waveformStyle);
 
 @override
 String toString() {
-  return 'FrbData(image: $image, serviceState: $serviceState, audio: $audio)';
+  return 'FrbData(image: $image, serviceState: $serviceState, audio: $audio, waveformStyle: $waveformStyle)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$FrbDataCopyWith<$Res> implements $FrbDataCopyWith<$Res> {
   factory _$FrbDataCopyWith(_FrbData value, $Res Function(_FrbData) _then) = __$FrbDataCopyWithImpl;
 @override @useResult
 $Res call({
- ui.Image? image, ServiceState serviceState, Float32List audio
+ ui.Image? image, ServiceState serviceState, Float32List audio, WaveformStyle waveformStyle
 });
 
 
@@ -262,12 +264,13 @@ class __$FrbDataCopyWithImpl<$Res>
 
 /// Create a copy of FrbData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? image = freezed,Object? serviceState = null,Object? audio = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? image = freezed,Object? serviceState = null,Object? audio = null,Object? waveformStyle = null,}) {
   return _then(_FrbData(
 image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ui.Image?,serviceState: null == serviceState ? _self.serviceState : serviceState // ignore: cast_nullable_to_non_nullable
 as ServiceState,audio: null == audio ? _self.audio : audio // ignore: cast_nullable_to_non_nullable
-as Float32List,
+as Float32List,waveformStyle: null == waveformStyle ? _self.waveformStyle : waveformStyle // ignore: cast_nullable_to_non_nullable
+as WaveformStyle,
   ));
 }
 

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/presentation/additional_widgets/alert_text.dart';
-import 'package:presentation/presentation/additional_widgets/bullet_list.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/labeled_list.dart';
-import 'package:presentation/presentation/additional_widgets/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
+import 'package:presentation/presentation/additional_widgets/list/labeled_list.dart';
+import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
+import 'package:presentation/presentation/additional_widgets/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // constants/headlines.dart
 const jniHeadline = Headline(highlight: "JNI", rest: ': Java Native Interface');
 
 const jniSlides = [
+  JniStart(),
   JniOverview(),
   WhichMeans(),
   JniFootGun(),
@@ -29,8 +30,8 @@ const jniSlides = [
   JniRecap(),
 ];
 
-class JniOverview extends StatelessWidget {
-  const JniOverview({super.key});
+class JniStart extends StatelessWidget {
+  const JniStart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,24 @@ class JniOverview extends StatelessWidget {
           items: [
             "JNI allows Java/Kotlin code running inside the JVM to call native code written in languages like C, C++, or Rust.",
             "The JVM loads a shared library (.so) into the process and instructs the OS to execute the native code directly, with no interpretation needed.",
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class JniOverview extends StatelessWidget {
+  const JniOverview({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: .start,
+      children: [
+        jniHeadline,
+        BulletList(
+          items: [
             "Primitive types (int, float...) are copied directly.",
             "Receiving reference types: Get a handle, ask the JVM to copy the data into native memory.",
             "That native copy lives outside the JVM where the garbage collector can't see it.",
