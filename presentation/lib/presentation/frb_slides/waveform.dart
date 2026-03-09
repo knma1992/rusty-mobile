@@ -1,22 +1,27 @@
+import 'dart:math';
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/presentation/additional_widgets/enum_dropdown_widget.dart';
+import 'package:presentation/presentation/additional_widgets/int_input_panel.dart';
 import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/frb_slides.dart';
 import 'package:presentation/util/context_extensions.dart';
 
-enum WaveformStyle { normal, dots, bars }
+enum WaveformStyle { normal, dots, bars, spiral }
 
 class WaveformScreen extends ConsumerWidget {
   const WaveformScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final (serviceState, waveformStyle) = ref.watch(
-      frbProvider.select((state) => (state.serviceState, state.waveformStyle)),
+    final (serviceState, waveformStyle, turns) = ref.watch(
+      frbProvider.select(
+        (state) => (state.serviceState, state.waveformStyle, state.turns),
+      ),
     );
 
     return Column(
@@ -29,7 +34,10 @@ class WaveformScreen extends ConsumerWidget {
         if (serviceState.audioRunnning)
           Expanded(
             child: Center(
-              child: WaveFormVisualizer(waveformStyle: waveformStyle),
+              child: WaveFormVisualizer(
+                waveformStyle: waveformStyle,
+                turns: turns,
+              ),
             ),
           )
         else ...[
@@ -58,12 +66,24 @@ class WaveformScreen extends ConsumerWidget {
             child: Text("Stop", style: context.textTheme.titleLarge),
           ),
         ],
-        EnumDropdownMenu<WaveformStyle>(
-          initialSelection: waveformStyle,
-          dropdownElementWidth: 300,
-          onSelected: (waveformStyle) =>
-              ref.read(frbProvider.notifier).changeWavefromStyle(waveformStyle),
-          enums: WaveformStyle.values,
+        Row(
+          spacing: 16,
+          mainAxisAlignment: .center,
+          children: [
+            EnumDropdownMenu<WaveformStyle>(
+              initialSelection: waveformStyle,
+              dropdownElementWidth: 300,
+              onSelected: (waveformStyle) => ref
+                  .read(frbProvider.notifier)
+                  .changeWavefromStyle(waveformStyle),
+              enums: WaveformStyle.values,
+            ),
+            if (waveformStyle == WaveformStyle.spiral)
+              NumberInputPanel(
+                onChanged: (v) =>
+                    ref.read(frbProvider.notifier).setTurns(v.toDouble()),
+              ),
+          ],
         ),
       ],
     );
@@ -72,7 +92,12 @@ class WaveformScreen extends ConsumerWidget {
 
 class WaveFormVisualizer extends ConsumerStatefulWidget {
   final WaveformStyle waveformStyle;
-  const WaveFormVisualizer({super.key, required this.waveformStyle});
+  final double turns;
+  const WaveFormVisualizer({
+    super.key,
+    required this.waveformStyle,
+    required this.turns,
+  });
 
   @override
   ConsumerState<WaveFormVisualizer> createState() => _WaveFormVisualizerState();
@@ -127,11 +152,127 @@ class _WaveFormVisualizerState extends ConsumerState<WaveFormVisualizer> {
             secondaryColor: colors.secondary,
             tertiaryColor: colors.tertiary,
           ),
+          WaveformStyle.spiral => SpiralWaveformPainter(
+            _notifier,
+            primaryColor: colors.primary,
+            secondaryColor: colors.secondary,
+            tertiaryColor: colors.tertiary,
+            turns: widget.turns,
+          ),
         },
         child: const SizedBox.expand(),
       ),
     );
   }
+}
+
+class SpiralWaveformPainter extends CustomPainter {
+  final ValueNotifier<Float32List?> samples;
+  final Color primaryColor;
+  final Color secondaryColor;
+  final Color tertiaryColor;
+
+  /// How many full rotations the spiral makes
+  final double turns;
+
+  SpiralWaveformPainter(
+    this.samples, {
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.tertiaryColor,
+    this.turns = 3.0,
+  }) : super(repaint: samples);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final data = samples.value;
+    if (data == null || data.length < 2) return;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final maxRadius = size.shortestSide / 2 * 0.9;
+    final minRadius = maxRadius * 0.08;
+
+    final pairs = data.length ~/ 2;
+
+    // --- Paints ---
+    final wavePaint = Paint()
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke
+      ..strokeJoin = StrokeJoin.round
+      ..strokeCap = StrokeCap.round;
+
+    final glowPaint = Paint()
+      ..strokeWidth = 4.0
+      ..style = PaintingStyle.stroke
+      ..strokeJoin = StrokeJoin.round
+      ..strokeCap = StrokeCap.round
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+
+    final path = Path();
+    final glowPath = Path();
+
+    for (var i = 0; i < pairs; i++) {
+      final t = i / (pairs - 1); // 0.0 (oldest) → 1.0 (newest)
+
+      final amplitude = data[i * 2 + 1].clamp(-1.0, 1.0);
+
+      // Spiral base radius grows from center outward as samples get newer
+      final baseRadius = lerpDouble(minRadius, maxRadius, t)!;
+
+      // Waveform displacement scales with radius so inner rings stay tight
+      final maxDisplace = baseRadius * 0.35;
+      final r = baseRadius + amplitude * maxDisplace;
+
+      final angle = t * turns * 2 * pi - pi / 2;
+
+      final x = center.dx + r * cos(angle);
+      final y = center.dy + r * sin(angle);
+
+      if (i == 0) {
+        path.moveTo(x, y);
+        glowPath.moveTo(x, y);
+      } else {
+        path.lineTo(x, y);
+        glowPath.lineTo(x, y);
+      }
+    }
+
+    // Draw glow (tertiary, blurred)
+    glowPaint.color = tertiaryColor.withValues(alpha: 0.3);
+    canvas.drawPath(glowPath, glowPaint);
+
+    // Draw main wave with gradient from secondary (old) → primary (new)
+    // Flutter's drawPath doesn't support per-point color, so we draw
+    // segmented chunks with lerped color
+    final int segments = 6;
+    final segmentSize = pairs ~/ segments;
+
+    for (var s = 0; s < segments; s++) {
+      final segT = s / (segments - 1);
+      final color = Color.lerp(secondaryColor, primaryColor, segT)!;
+
+      final segPath = Path();
+      final start = s * segmentSize;
+      final end = (s == segments - 1) ? pairs : start + segmentSize + 1;
+
+      for (var i = start; i < end; i++) {
+        final t = i / (pairs - 1);
+        final amplitude = data[i * 2 + 1].clamp(-1.0, 1.0);
+        final baseRadius = lerpDouble(minRadius, maxRadius, t)!;
+        final r = baseRadius + amplitude * baseRadius * 0.35;
+        final angle = t * turns * 2 * pi - pi / 2;
+        final x = center.dx + r * cos(angle);
+        final y = center.dy + r * sin(angle);
+        i == start ? segPath.moveTo(x, y) : segPath.lineTo(x, y);
+      }
+
+      wavePaint.color = color.withValues(alpha: 0.4 + 0.6 * (s / segments));
+      canvas.drawPath(segPath, wavePaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(SpiralWaveformPainter old) => false;
 }
 
 class WaveformPainter extends CustomPainter {

@@ -92,6 +92,10 @@ class FrbSetup extends StatelessWidget {
         MarkdownWidget(assetPath: 'assets/markdown/frb/install.md'),
         BulletItem("Create the app and you're ready to go."),
         MarkdownWidget(assetPath: 'assets/markdown/frb/setup.md'),
+        BulletItem(
+          "Modify your Rust code and let the frb generator do the rest.",
+        ),
+        MarkdownWidget(assetPath: 'assets/markdown/frb/generator.md'),
       ],
     );
   }

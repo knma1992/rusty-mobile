@@ -24,6 +24,7 @@ abstract class FrbData with _$FrbData {
     required ui.Image? image,
     required ServiceState serviceState,
     required Float32List audio,
+    required double turns,
     required WaveformStyle waveformStyle,
   }) = _FrbData;
 }

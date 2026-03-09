@@ -41,7 +41,7 @@ final class FrbNotifierProvider
   }
 }
 
-String _$frbNotifierHash() => r'a5828a36bc0ab385c773554b6fbc58b490e5be12';
+String _$frbNotifierHash() => r'9b9d8bff4ea6220e91dbc9a0939a4f000f167c58';
 
 abstract class _$FrbNotifier extends $Notifier<FrbData> {
   FrbData build();

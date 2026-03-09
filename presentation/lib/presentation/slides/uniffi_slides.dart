@@ -99,7 +99,7 @@ class UniffiBuild extends StatelessWidget {
       children: [
         uniffiHeadline,
         BulletItem(
-          "Now implement the cli commands in your favorite scripting language.",
+          "Implement the cli commands in your favorite scripting language.",
         ),
         MarkdownWidget(assetPath: 'assets/markdown/uniffi/build_uniffi.md'),
         Center(

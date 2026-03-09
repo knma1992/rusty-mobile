@@ -29,8 +29,13 @@ class FrbNotifier extends _$FrbNotifier {
       image: null,
       serviceState: ServiceState.idle,
       audio: Float32List.fromList([]),
+      turns: 3.0,
       waveformStyle: WaveformStyle.normal,
     );
+  }
+
+  void setTurns(double turns) async {
+    state = state.copyWith(turns: turns);
   }
 
   Future<void> startWavefromStream() async {
@@ -43,7 +48,7 @@ class FrbNotifier extends _$FrbNotifier {
 
     recorder
         ?.startStreamWaveform(
-          bufferSize: BigInt.from(8000),
+          bufferSize: BigInt.from(16000),
           samplesPerPixel: BigInt.from(4),
         )
         .listen(

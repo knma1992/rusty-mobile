@@ -171,7 +171,7 @@ class JniSetupProjectSecond extends StatelessWidget {
       children: [
         jniHeadline,
         BulletItem(
-          "Install Rust NDK for easier Android environment configuration.",
+          "Install cargo-ndk for easier Android environment configuration.",
         ),
         MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_ndk.md'),
         BulletItem("Create a build cli in your favourite scripting language."),
