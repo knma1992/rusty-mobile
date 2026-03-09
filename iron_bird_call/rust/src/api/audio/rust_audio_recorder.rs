@@ -12,7 +12,10 @@ use std::{
 
 use flutter_rust_bridge::frb;
 
-use crate::{api::audio::audio_util::downsample_minmax, frb_generated::StreamSink};
+use crate::{
+    api::audio::audio_util::{downsample_minmax, WaveformBuffer},
+    frb_generated::StreamSink,
+};
 
 use crate::api::audio::audio_util::{downmix_to_mono, get_best_buffer_size, get_best_sample_rate};
 
@@ -87,22 +90,11 @@ impl RustAudioRecorder {
         sink: StreamSink<Vec<f32>>,
     ) -> Result<()> {
         let rx = self.start();
-
-        let mut ring = VecDeque::with_capacity(buffer_size);
+        let mut ring_buffer = WaveformBuffer::new(buffer_size);
 
         while let Ok(audio) = rx.recv() {
-            ring.extend(downsample_minmax(&audio, samples_per_pixel));
-
-            // Drain any extra chunks to avoid latency buildup
-            while let Ok(extra) = rx.try_recv() {
-                ring.extend(&extra);
-            }
-
-            if ring.len() > buffer_size {
-                ring.drain(..ring.len() - buffer_size);
-            }
-
-            if sink.add(ring.make_contiguous().to_vec()).is_err() {
+            ring_buffer.push_slice(&downsample_minmax(&audio, samples_per_pixel));
+            if sink.add(ring_buffer.to_vec()).is_err() {
                 break;
             }
         }

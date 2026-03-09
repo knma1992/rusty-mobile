@@ -20,6 +20,67 @@ pub fn downmix_to_mono(input: &[f32], channels: usize) -> Vec<f32> {
         .collect()
 }
 
+#[flutter_rust_bridge::frb(ignore)]
+pub struct WaveformBuffer {
+    data: Vec<f32>,
+    head: usize,
+    len: usize,
+    capacity: usize,
+}
+
+#[flutter_rust_bridge::frb(ignore)]
+impl WaveformBuffer {
+    pub fn new(capacity: usize) -> Self {
+        Self {
+            data: vec![0.0; capacity],
+            head: 0,
+            len: 0,
+            capacity,
+        }
+    }
+
+    /// Push a single sample
+    pub fn push(&mut self, sample: f32) {
+        self.data[self.head] = sample;
+        self.head = (self.head + 1) % self.capacity;
+        if self.len < self.capacity {
+            self.len += 1;
+        }
+    }
+
+    /// Push a slice of samples
+    pub fn push_slice(&mut self, samples: &[f32]) {
+        let samples = if samples.len() > self.capacity {
+            &samples[samples.len() - self.capacity..]
+        } else {
+            samples
+        };
+        let start = self.head;
+        let end = start + samples.len();
+        if end <= self.capacity {
+            self.data[start..end].copy_from_slice(samples);
+        } else {
+            let split = self.capacity - start;
+            self.data[start..].copy_from_slice(&samples[..split]);
+            self.data[..end - self.capacity].copy_from_slice(&samples[split..]);
+        }
+        self.head = end % self.capacity;
+        self.len = (self.len + samples.len()).min(self.capacity);
+    }
+
+    /// Returns samples in chronological order (oldest → newest)
+    pub fn to_vec(&self) -> Vec<f32> {
+        let mut out = Vec::with_capacity(self.len);
+        if self.len < self.capacity {
+            out.extend_from_slice(&self.data[..self.len]);
+        } else {
+            out.extend_from_slice(&self.data[self.head..]);
+            out.extend_from_slice(&self.data[..self.head]);
+        }
+        out
+    }
+}
+
 /// Checks if 16kHz is available for f32 encoding on the device.
 /// If available, returns 16000. Otherwise, returns the next best in order of preference.
 /// Preference order: 16kHz → 32kHz → 48kHz → 24kHz → 44.1kHz  → 22.05kHz → 8kHz
@@ -46,7 +107,7 @@ pub fn get_best_sample_rate(device: &cpal::Device) -> Result<u32> {
 #[flutter_rust_bridge::frb(ignore)]
 pub fn get_best_buffer_size(device: &cpal::Device, sample_rate: u32) -> Result<(Option<u32>, u16)> {
     // Target 100ms buffer: sample_rate * 0.1
-    let target_buffer_size = (sample_rate as f32 * 0.1) as u32;
+    let target_buffer_size = (sample_rate as f32 * 0.05) as u32;
 
     // Get the supported buffer size range for this device
     let supported_configs = device
@@ -132,7 +193,7 @@ pub fn downsample_minmax(samples: &[f32], chunk_size: usize) -> Vec<f32> {
                     max = s;
                 }
             }
-            [min, max]
+            [min.signum() * min.abs().sqrt(), max.signum() * max.abs().sqrt()]
         })
         .collect()
 }

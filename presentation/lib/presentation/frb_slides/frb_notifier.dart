@@ -43,8 +43,8 @@ class FrbNotifier extends _$FrbNotifier {
 
     recorder
         ?.startStreamWaveform(
-          bufferSize: BigInt.from(32000),
-          samplesPerPixel: BigInt.from(2),
+          bufferSize: BigInt.from(8000),
+          samplesPerPixel: BigInt.from(4),
         )
         .listen(
           (audio) {
