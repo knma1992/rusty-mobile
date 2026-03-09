@@ -57,7 +57,7 @@ class _BlankCanvasState extends ConsumerState<BlankCanvas> {
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: const .fromLTRB(32.0, 16.0, 32.0, 16.0),
+            padding: const .fromLTRB(32.0, 20.0, 32.0, 16.0),
             child: InteractiveViewer(
               transformationController: _controller,
               child: widget.body,

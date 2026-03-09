@@ -10,7 +10,7 @@ class WhyRustSlide extends StatelessWidget {
     return const Column(
       crossAxisAlignment: .start,
       children: [
-        Headline(highlight: 'Why', rest: ': Reasons to use Rust'),
+        Headline(highlight: 'Reasons to use Rust', rest: ''),
         BulletList(
           items: [
             'Speed: Native speed with zero garbage collector pauses',
