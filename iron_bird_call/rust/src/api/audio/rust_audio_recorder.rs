@@ -4,11 +4,8 @@ use cpal::{
     BufferSize, Device, StreamConfig,
 };
 
+use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::Mutex;
-use std::{
-    collections::VecDeque,
-    sync::mpsc::{channel, Receiver, Sender},
-};
 
 use flutter_rust_bridge::frb;
 
@@ -109,8 +106,6 @@ impl RustAudioRecorder {
 
         let device = self.device.clone();
         let config = self.stream_config.clone();
-
-        //--------------
 
         std::thread::spawn(move || {
             fn run_stream(
