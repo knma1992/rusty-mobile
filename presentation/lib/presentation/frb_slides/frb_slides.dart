@@ -19,8 +19,8 @@ const frbSlides = [
   FrbOverview(),
   FrbSetup(),
   ...frbExampleSlides,
-  WaveformScreen(),
   TerrainScreen(),
+  WaveformScreen(),
 ];
 
 class FrbHint extends StatelessWidget {
