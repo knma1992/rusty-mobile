@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation/additional_widgets/headline.dart';
 import 'package:presentation/presentation/additional_widgets/styled_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TitleSlide extends StatelessWidget {
   const TitleSlide({super.key});
@@ -37,6 +38,19 @@ class TitleSlide extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 80),
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                launchUrl(Uri.parse('https://www.kenbun.de'));
+              },
+              child: Image.asset(
+                'assets/images/kenbun_web_app_bar.png',
+                height: 100,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
         ],

@@ -12,6 +12,7 @@ const jniHeadline = Headline(highlight: "JNI", rest: ': Java Native Interface');
 
 const jniSlides = [
   JniStart(),
+  JniStartImage(),
   JniOverview(),
   WhichMeans(),
   JniFootGun(),
@@ -44,6 +45,28 @@ class JniStart extends StatelessWidget {
             "JNI allows Java/Kotlin code running inside the JVM to call native code written in languages like C, C++, or Rust.",
             "The JVM loads a shared library (.so) into the process and instructs the OS to execute the native code directly, with no interpretation needed.",
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class JniStartImage extends StatelessWidget {
+  const JniStartImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: .start,
+      children: [
+        const JniStart(),
+        const SizedBox(height: 60),
+        Center(
+          child: Image.asset(
+            'assets/images/gemini_jvm_jni.png',
+            height: 500,
+            fit: BoxFit.fitHeight,
+          ),
         ),
       ],
     );
