@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  go_router: ^17.3.0
   flutter_syntax_view: ^4.1.7
   markdown_widget: ^2.3.2+8
   window_manager: ^0.5.2

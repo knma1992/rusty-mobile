@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/main.dart';
+import 'package:presentation/slide_notifier.dart';
 import 'package:presentation/util/context_extensions.dart';
 
 class SlideNavButtons extends ConsumerStatefulWidget {
@@ -36,6 +37,9 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
 
   @override
   Widget build(BuildContext context) {
+    final index = ref.watch(slideIndexProvider);
+    final notifier = ref.read(slideIndexProvider.notifier);
+
     return Stack(
       alignment: .center,
       children: [
@@ -54,17 +58,17 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
                   mainAxisAlignment: .center,
                   children: [
                     IconButton.filled(
-                      onPressed: context.isFirstSlide
-                          ? null
-                          : context.previousSlide,
+                      onPressed: index == 0 ? null : notifier.previous,
                       icon: const Icon(Icons.arrow_back),
                     ),
                     Text(
-                      '${(context.currentSlideIndex ?? 0) + 1} / ${slides.length}',
+                      '${index + 1} / ${slides.length}',
                       style: context.textTheme.bodyLarge,
                     ),
                     IconButton.filled(
-                      onPressed: context.isLastSlide ? null : context.nextSlide,
+                      onPressed: index == slides.length - 1
+                          ? null
+                          : notifier.next,
                       icon: const Icon(Icons.arrow_forward),
                     ),
                   ],
@@ -77,7 +81,7 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
         Positioned(
           right: 24,
           child: Text(
-            "${context.currentSlideIndex}",
+            "$index",
             style: context.textTheme.titleLarge,
           ),
         ),

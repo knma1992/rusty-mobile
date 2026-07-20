@@ -1,13 +1,8 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-part 'scale_notifier.g.dart';
-
-@Riverpod(keepAlive: true)
-class ScaleNotifier extends _$ScaleNotifier {
+class ScaleNotifier extends Notifier<double> {
   @override
-  double build() {
-    return 1.0;
-  }
+  double build() => 1.0;
 
   void increase() {
     state = (state + 0.04).clamp(0.5, 2.0);
@@ -21,3 +16,7 @@ class ScaleNotifier extends _$ScaleNotifier {
     state = 1.0;
   }
 }
+
+final scaleProvider = NotifierProvider<ScaleNotifier, double>(
+  ScaleNotifier.new,
+);

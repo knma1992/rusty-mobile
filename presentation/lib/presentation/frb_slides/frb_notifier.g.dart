@@ -41,13 +41,13 @@ final class FrbNotifierProvider
   }
 }
 
-String _$frbNotifierHash() => r'9b9d8bff4ea6220e91dbc9a0939a4f000f167c58';
+String _$frbNotifierHash() => r'850e05fa432d4b1521ddbe05e7b07c90e1dee790';
 
 abstract class _$FrbNotifier extends $Notifier<FrbData> {
   FrbData build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<FrbData, FrbData>;
     final element =
         ref.element
@@ -57,6 +57,6 @@ abstract class _$FrbNotifier extends $Notifier<FrbData> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

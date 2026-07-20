@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:presentation/main.dart';
 import 'package:presentation/presentation/additional_widgets/slide_nav_buttons.dart';
 import 'package:presentation/scale_notifier.dart';
+import 'package:presentation/slide_notifier.dart';
 import 'package:presentation/util/context_extensions.dart';
 import 'package:window_manager/window_manager.dart';
 
 class BlankCanvas extends ConsumerStatefulWidget {
-  final Widget body;
-  const BlankCanvas({super.key, required this.body});
+  const BlankCanvas({super.key});
 
   @override
   ConsumerState<BlankCanvas> createState() => _BlankCanvasState();
@@ -33,9 +34,9 @@ class _BlankCanvasState extends ConsumerState<BlankCanvas> {
         _isTitleBarVisible ? TitleBarStyle.normal : TitleBarStyle.hidden,
       );
     } else if (event.isLeftArrow) {
-      context.previousSlide();
+      ref.read(slideIndexProvider.notifier).previous();
     } else if (event.isRightArrow) {
-      context.nextSlide();
+      ref.read(slideIndexProvider.notifier).next();
     } else if (event.isCharAdd) {
       ref.read(scaleProvider.notifier).increase();
     } else if (event.isChardMinus) {
@@ -47,6 +48,8 @@ class _BlankCanvasState extends ConsumerState<BlankCanvas> {
 
   @override
   Widget build(BuildContext context) {
+    final index = ref.watch(slideIndexProvider);
+
     return Focus(
       focusNode: _focusNode,
       autofocus: true,
@@ -60,7 +63,7 @@ class _BlankCanvasState extends ConsumerState<BlankCanvas> {
             padding: const .fromLTRB(32.0, 20.0, 32.0, 16.0),
             child: InteractiveViewer(
               transformationController: _controller,
-              child: widget.body,
+              child: slides[index],
             ),
           ),
         ),

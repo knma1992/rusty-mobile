@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iron_bird_call/iron_bird_call.dart' as rust_api;
 import 'package:presentation/presentation/default/blank_canvas.dart';
@@ -41,23 +40,6 @@ const List<Widget> slides = [
   ...frbSlides,
 ];
 
-final GoRouter router = GoRouter(
-  initialLocation: '/slide/0',
-  routes: List.generate(
-    slides.length,
-    (index) => GoRoute(
-      path: '/slide/$index',
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: slides[index],
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            BlankCanvas(body: child),
-      ),
-    ),
-  ),
-);
-
 class PresentationApp extends ConsumerWidget {
   const PresentationApp({super.key});
 
@@ -65,9 +47,9 @@ class PresentationApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scale = ref.watch(scaleProvider);
 
-    return MaterialApp.router(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routerConfig: router,
+      home: const BlankCanvas(),
       theme: MaterialTheme(GoogleFonts.googleSansCodeTextTheme()).dark(),
       builder: (context, child) {
         return LayoutBuilder(
