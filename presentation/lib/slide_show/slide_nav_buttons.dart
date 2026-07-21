@@ -1,11 +1,10 @@
-// slide_nav_buttons.dart
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/main.dart';
-import 'package:presentation/slide_notifier.dart';
-import 'package:presentation/util/context_extensions.dart';
+import 'package:presentation/slide_show/context_extensions.dart';
+import 'package:presentation/slide_show/slide_notifier.dart';
 
 class SlideNavButtons extends ConsumerStatefulWidget {
   const SlideNavButtons({super.key});
@@ -80,10 +79,7 @@ class _SlideNavButtonsState extends ConsumerState<SlideNavButtons> {
 
         Positioned(
           right: 24,
-          child: Text(
-            "$index",
-            style: context.textTheme.titleLarge,
-          ),
+          child: Text("$index", style: context.textTheme.titleLarge),
         ),
       ],
     );

@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/presentation/additional_widgets/enum_dropdown_widget.dart';
 import 'package:presentation/presentation/additional_widgets/int_input_panel.dart';
-import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/frb_slides.dart';
-import 'package:presentation/util/context_extensions.dart';
+import 'package:presentation/slide_show/bullet_list.dart';
+import 'package:presentation/slide_show/context_extensions.dart';
 
 enum WaveformStyle { normal, dots, bars, spiral }
 

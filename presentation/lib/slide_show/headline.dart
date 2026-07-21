@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/util/context_extensions.dart';
+import 'package:presentation/slide_show/context_extensions.dart';
 
 class Headline extends StatelessWidget {
   final String highlight;

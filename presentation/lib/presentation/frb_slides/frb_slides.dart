@@ -2,14 +2,14 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
-import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
-import 'package:presentation/presentation/additional_widgets/styled_text.dart';
 import 'package:presentation/presentation/frb_slides/frb_examples.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/waveform.dart';
-import 'package:presentation/util/context_extensions.dart';
+import 'package:presentation/slide_show/bullet_list.dart';
+import 'package:presentation/slide_show/context_extensions.dart';
+import 'package:presentation/slide_show/headline.dart';
+import 'package:presentation/slide_show/markdown/markdown_widget_block.dart';
+import 'package:presentation/slide_show/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const frbHeadline = Headline(highlight: "FRB", rest: ': Flutter Rust Bridge');
@@ -89,13 +89,13 @@ class FrbSetup extends StatelessWidget {
       children: [
         frbHeadline,
         BulletItem("Install Flutter Rust Bridge Codegen."),
-        MarkdownWidget(assetPath: 'assets/markdown/frb/install.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/frb/install.md'),
         BulletItem("Create the app and you're ready to go."),
-        MarkdownWidget(assetPath: 'assets/markdown/frb/setup.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/frb/setup.md'),
         BulletItem(
           "Modify your Rust code and let the frb generator do the rest.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/frb/generator.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/frb/generator.md'),
       ],
     );
   }

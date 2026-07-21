@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/main.dart';
-import 'package:presentation/presentation/additional_widgets/slide_nav_buttons.dart';
-import 'package:presentation/scale_notifier.dart';
-import 'package:presentation/slide_notifier.dart';
-import 'package:presentation/util/context_extensions.dart';
+import 'package:presentation/slide_show/context_extensions.dart';
+import 'package:presentation/slide_show/scale_notifier.dart';
+import 'package:presentation/slide_show/slide_nav_buttons.dart';
+import 'package:presentation/slide_show/slide_notifier.dart';
 import 'package:window_manager/window_manager.dart';
 
 class BlankCanvas extends ConsumerStatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/styled_text.dart';
+import 'package:presentation/slide_show/headline.dart';
+import 'package:presentation/slide_show/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TitleSlide extends StatelessWidget {

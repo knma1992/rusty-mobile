@@ -6,7 +6,7 @@ final markdownConfig = MarkdownConfig.darkConfig.copy(
   configs: [
     PreConfig.darkConfig.copy(
       theme: zedOneDarkTheme,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xff1e1e1e),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
-import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
-import 'package:presentation/presentation/additional_widgets/styled_text.dart';
+import 'package:presentation/slide_show/bullet_list.dart';
+import 'package:presentation/slide_show/headline.dart';
+import 'package:presentation/slide_show/markdown/markdown_widget_block.dart';
+import 'package:presentation/slide_show/styled_text.dart';
 
 // constants/headlines.dart
 const uniffiHeadline = Headline(
@@ -52,9 +52,9 @@ class UniffiHowTo extends StatelessWidget {
       children: [
         uniffiHeadline,
         BulletItem("Create a Rust library."),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/cargo_init.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/uniffi/cargo_init.md'),
         BulletItem("Add uniffi as dependency and build-dependency."),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/cargo_toml.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/uniffi/cargo_toml.md'),
       ],
     );
   }
@@ -72,12 +72,14 @@ class UniffiHowToSecond extends StatelessWidget {
         BulletItem(
           "Add Rust build file, this ensures it uses the same version defined in cargo.toml.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/uniffi_bindgen.md'),
+        MarkdownWidgetBlock(
+          assetPath: 'assets/markdown/uniffi/uniffi_bindgen.md',
+        ),
         //--
         BulletItem(
           "Either define the Schema in an UDL file or use proc macros.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/proc_macros.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/uniffi/proc_macros.md'),
         Center(
           child: Padding(
             padding: .symmetric(vertical: 10.0),
@@ -101,7 +103,9 @@ class UniffiBuild extends StatelessWidget {
         BulletItem(
           "Implement the cli commands in your favorite scripting language.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/build_uniffi.md'),
+        MarkdownWidgetBlock(
+          assetPath: 'assets/markdown/uniffi/build_uniffi.md',
+        ),
         Center(
           child: Padding(
             padding: .symmetric(vertical: 10.0),
@@ -127,7 +131,9 @@ class UniffiGenerated extends StatelessWidget {
         BulletItem(
           "It's all there, 1137 lines of generated blob for two functions and a data class.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/uniffi/uniffi_garbage.md'),
+        MarkdownWidgetBlock(
+          assetPath: 'assets/markdown/uniffi/uniffi_garbage.md',
+        ),
         Center(
           child: Padding(
             padding: .symmetric(vertical: 10.0),

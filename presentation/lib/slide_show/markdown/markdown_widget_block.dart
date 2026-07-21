@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:markdown_widget/widget/markdown_block.dart';
-import 'package:presentation/markdown_theme.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'markdown_block.g.dart';
+import 'package:presentation/slide_show/markdown/markdown_theme.dart';
 
 const double _markdownTextScale = 1.2;
 
-@riverpod
-Future<String> markdownAsset(Ref ref, String assetPath) =>
-    rootBundle.loadString(assetPath);
+final markdownAssetProvider = FutureProvider.autoDispose.family<String, String>(
+  (ref, assetPath) => rootBundle.loadString(assetPath),
+);
 
-class MarkdownWidget extends ConsumerWidget {
+class MarkdownWidgetBlock extends ConsumerWidget {
   final String assetPath;
-  const MarkdownWidget({super.key, required this.assetPath});
+  const MarkdownWidgetBlock({super.key, required this.assetPath});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

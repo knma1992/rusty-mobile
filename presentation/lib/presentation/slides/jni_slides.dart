@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/presentation/additional_widgets/headline.dart';
-import 'package:presentation/presentation/additional_widgets/list/bullet_list.dart';
-import 'package:presentation/presentation/additional_widgets/list/labeled_list.dart';
-import 'package:presentation/presentation/additional_widgets/markdown/markdown_block.dart';
-import 'package:presentation/presentation/additional_widgets/styled_text.dart';
+import 'package:presentation/slide_show/bullet_list.dart';
+import 'package:presentation/slide_show/headline.dart';
+import 'package:presentation/slide_show/labeled_list.dart';
+import 'package:presentation/slide_show/markdown/markdown_widget_block.dart';
+import 'package:presentation/slide_show/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // constants/headlines.dart
@@ -172,13 +172,13 @@ class JniSetupProjectFirst extends StatelessWidget {
         BulletItem(
           "Install Rust and set up a Rust library near your Android project.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_init.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/cargo_init.md'),
         BulletItem(
           "Add crate-type for creating a C-compatible dynamic library and ndk compile targets.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_toml.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/cargo_toml.md'),
         BulletItem("Install Rust compile targets"),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/rustup_install.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/rustup_install.md'),
       ],
     );
   }
@@ -196,9 +196,9 @@ class JniSetupProjectSecond extends StatelessWidget {
         BulletItem(
           "Install cargo-ndk for easier Android environment configuration.",
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/cargo_ndk.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/cargo_ndk.md'),
         BulletItem("Create a build cli in your favourite scripting language."),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/build_jni.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/build_jni.md'),
       ],
     );
   }
@@ -214,7 +214,7 @@ class JniDetail extends StatelessWidget {
       children: [
         jniHeadline,
         BulletList(items: ["Breaking down the JNI function signature."]),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/jni.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni.md'),
         LabeledList(
           items: [
             (
@@ -296,7 +296,7 @@ class JniRustAwesome extends StatelessWidget {
       children: [
         jniHeadline,
         BulletList(items: ["Rust handles that for us by implementing drop."]),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/ghidra.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/ghidra.md'),
       ],
     );
   }
@@ -312,13 +312,13 @@ class JniFunction extends StatelessWidget {
       children: [
         jniHeadline,
         BulletList(items: ["Reducing boilerplate with jni_fn."]),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/jni.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni.md'),
         BulletList(
           items: [
             "With the jni_fn annotation the function signature is simplified.",
           ],
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/jni_fn.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni_fn.md'),
       ],
     );
   }
@@ -334,7 +334,7 @@ class JniLoad extends StatelessWidget {
       children: [
         jniHeadline,
         BulletItem("Load in the dynamic library."),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/system_load.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/system_load.md'),
       ],
     );
   }
@@ -354,7 +354,7 @@ class JniObjects extends StatelessWidget {
             "What about objects? Let's define a generic struct and instantiate an object.",
           ],
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/city.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/city.md'),
 
         Center(
           child: HighlightText(
@@ -381,7 +381,7 @@ class JniObjectSecond extends StatelessWidget {
             "Arrays must first be allocated and then the data can be copied in.",
           ],
         ),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/jni_types.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni_types.md'),
       ],
     );
   }
@@ -397,7 +397,7 @@ class JniObjectThird extends StatelessWidget {
       children: [
         jniHeadline,
         BulletList(items: ["Now to the fun part!"]),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/get_karlsruhe.md'),
+        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/get_karlsruhe.md'),
       ],
     );
   }
@@ -413,7 +413,9 @@ class JniKotlinDataClass extends StatelessWidget {
       children: [
         jniHeadline,
         BulletList(items: ["Kotlin City Data Class"]),
-        MarkdownWidget(assetPath: 'assets/markdown/jni/city_data_class.md'),
+        MarkdownWidgetBlock(
+          assetPath: 'assets/markdown/jni/city_data_class.md',
+        ),
       ],
     );
   }
