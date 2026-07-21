@@ -7,8 +7,7 @@ import 'package:presentation/presentation/slides/jni_slides.dart';
 import 'package:presentation/presentation/slides/title.dart';
 import 'package:presentation/presentation/slides/uniffi_slides.dart';
 import 'package:presentation/presentation/slides/why_rust_slide.dart';
-import 'package:presentation/slide_show/blank_canvas.dart';
-import 'package:presentation/slide_show/scaled_canvas.dart';
+import 'package:presentation/slide_show/slide_show.dart';
 import 'package:presentation/slide_show/theme.dart';
 import 'package:presentation/slide_show/util.dart';
 
@@ -35,11 +34,8 @@ class PresentationApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const BlankCanvas(),
+      home: const SlideShow(slides: slides),
       theme: MaterialTheme(GoogleFonts.googleSansCodeTextTheme()).dark(),
-      builder: (context, child) {
-        return ScaledCanvas(child: child!);
-      },
     );
   }
 }
