@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
-class MaterialTheme {
+class SlydeTheme {
   final TextTheme textTheme;
 
-  const MaterialTheme(this.textTheme);
+  const SlydeTheme(this.textTheme);
 
   static ColorScheme lightScheme() {
     return const ColorScheme(

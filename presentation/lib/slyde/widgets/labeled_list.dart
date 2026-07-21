@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/slide_show/context_extensions.dart';
+import 'package:presentation/slyde/context_extensions.dart';
 
 class LabeledList extends StatelessWidget {
   final List<({String header, String body})> items;

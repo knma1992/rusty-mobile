@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/slide_show/widgets/bullet_list.dart';
-import 'package:presentation/slide_show/widgets/headline.dart';
-import 'package:presentation/slide_show/widgets/labeled_list.dart';
-import 'package:presentation/slide_show/widgets/markdown_widget_block.dart';
-import 'package:presentation/slide_show/widgets/styled_text.dart';
+import 'package:presentation/slyde/widgets/bullet_list.dart';
+import 'package:presentation/slyde/widgets/headline.dart';
+import 'package:presentation/slyde/widgets/labeled_list.dart';
+import 'package:presentation/slyde/widgets/markdown_widget_block.dart';
+import 'package:presentation/slyde/widgets/styled_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // constants/headlines.dart

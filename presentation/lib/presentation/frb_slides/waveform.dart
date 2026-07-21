@@ -8,8 +8,8 @@ import 'package:presentation/presentation/additional_widgets/enum_dropdown_widge
 import 'package:presentation/presentation/additional_widgets/int_input_panel.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/frb_slides.dart';
-import 'package:presentation/slide_show/context_extensions.dart';
-import 'package:presentation/slide_show/widgets/bullet_list.dart';
+import 'package:presentation/slyde/context_extensions.dart';
+import 'package:presentation/slyde/widgets/bullet_list.dart';
 
 enum WaveformStyle { normal, dots, bars, spiral }
 

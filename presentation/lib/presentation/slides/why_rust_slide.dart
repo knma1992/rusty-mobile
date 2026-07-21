@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/slide_show/widgets/bullet_list.dart';
-import 'package:presentation/slide_show/widgets/headline.dart';
+import 'package:presentation/slyde/widgets/bullet_list.dart';
+import 'package:presentation/slyde/widgets/headline.dart';
 
 class WhyRustSlide extends StatelessWidget {
   const WhyRustSlide({super.key});
