@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation/frb_slides/frb_slides.dart';
-import 'package:presentation/slyde/widgets/bullet_list.dart';
-import 'package:presentation/slyde/widgets/markdown_widget_block.dart';
+import 'package:presentation/slyde/slyde.dart';
 
 const frbExampleSlides = [FrbEnumRust(), FrbEnumDart(), FrbStream()];
 

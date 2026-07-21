@@ -5,11 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:presentation/presentation/frb_slides/frb_examples.dart';
 import 'package:presentation/presentation/frb_slides/frb_notifier.dart';
 import 'package:presentation/presentation/frb_slides/waveform.dart';
-import 'package:presentation/slyde/context_extensions.dart';
-import 'package:presentation/slyde/widgets/bullet_list.dart';
-import 'package:presentation/slyde/widgets/headline.dart';
-import 'package:presentation/slyde/widgets/markdown_widget_block.dart';
-import 'package:presentation/slyde/widgets/styled_text.dart';
+import 'package:presentation/slyde/slyde.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const frbHeadline = Headline(highlight: "FRB", rest: ': Flutter Rust Bridge');
