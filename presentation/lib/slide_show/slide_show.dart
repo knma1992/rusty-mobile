@@ -4,17 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:window_manager/window_manager.dart';
 
-/// A self-contained slide show.
-///
-/// Owns all of its own state (current slide + zoom) in this one
-/// [StatefulWidget] — no external state management required. Give it the
-/// slides to show and drop it into `home:`.
-///
-/// Controls:
-///  * ← / →   previous / next slide
-///  * + / -   zoom in / out
-///  * space   reset zoom
-///  * h       toggle the window title bar
 class SlideShow extends StatefulWidget {
   const SlideShow({super.key, required this.slides});
 
@@ -25,7 +14,6 @@ class SlideShow extends StatefulWidget {
 }
 
 class _SlideShowState extends State<SlideShow> {
-  // --- State ---------------------------------------------------------------
   int _index = 0;
   double _scale = 1.0;
   bool _titleBarVisible = true;
@@ -48,7 +36,6 @@ class _SlideShowState extends State<SlideShow> {
     super.dispose();
   }
 
-  // --- Mutations (just setState) ------------------------------------------
   void _next() => setState(() {
     if (!_isLast) _index++;
   });
@@ -67,23 +54,23 @@ class _SlideShowState extends State<SlideShow> {
 
   // --- Input ---------------------------------------------------------------
   Future<void> _onKeyEvent(KeyEvent event) async {
-    if (event is! KeyDownEvent) return;
     final key = event.logicalKey;
+    final isDown = event is KeyDownEvent;
 
-    if (key == LogicalKeyboardKey.keyH) {
+    if (event.character == '+') {
+      _increaseScale();
+    } else if (event.character == '-') {
+      _decreaseScale();
+    } else if (isDown && key == LogicalKeyboardKey.keyH) {
       _titleBarVisible = !_titleBarVisible;
       await windowManager.setTitleBarStyle(
         _titleBarVisible ? TitleBarStyle.normal : TitleBarStyle.hidden,
       );
-    } else if (key == LogicalKeyboardKey.arrowLeft) {
+    } else if (isDown && key == LogicalKeyboardKey.arrowLeft) {
       _previous();
-    } else if (key == LogicalKeyboardKey.arrowRight) {
+    } else if (isDown && key == LogicalKeyboardKey.arrowRight) {
       _next();
-    } else if (event.character == '+') {
-      _increaseScale();
-    } else if (event.character == '-') {
-      _decreaseScale();
-    } else if (key == LogicalKeyboardKey.space) {
+    } else if (isDown && key == LogicalKeyboardKey.space) {
       _resetScale();
     }
   }
@@ -151,37 +138,55 @@ class _SlideShowState extends State<SlideShow> {
   }
 
   Widget _buildNavBar(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => _showNav(),
-      onExit: (_) => _hideNavSoon(),
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 300),
-        opacity: _navVisible ? 1.0 : 0.0,
-        child: IgnorePointer(
-          ignoring: !_navVisible,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              spacing: 16,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton.filled(
-                  onPressed: _isFirst ? null : _previous,
-                  icon: const Icon(Icons.arrow_back),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Hover-reveal navigation controls.
+        MouseRegion(
+          onEnter: (_) => _showNav(),
+          onExit: (_) => _hideNavSoon(),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: _navVisible ? 1.0 : 0.0,
+            child: IgnorePointer(
+              ignoring: !_navVisible,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
                 ),
-                Text(
-                  '${_index + 1} / ${widget.slides.length}',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                child: Row(
+                  spacing: 16,
+                  mainAxisAlignment: .center,
+                  children: [
+                    IconButton.filled(
+                      onPressed: _isFirst ? null : _previous,
+                      icon: const Icon(Icons.arrow_back),
+                    ),
+                    Text(
+                      '${_index + 1} / ${widget.slides.length}',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    IconButton.filled(
+                      onPressed: _isLast ? null : _next,
+                      icon: const Icon(Icons.arrow_forward),
+                    ),
+                  ],
                 ),
-                IconButton.filled(
-                  onPressed: _isLast ? null : _next,
-                  icon: const Icon(Icons.arrow_forward),
-                ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+
+        // Always-visible slide number in the bottom-right corner.
+        Positioned(
+          right: 24,
+          child: Text(
+            '${_index + 1}',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+      ],
     );
   }
 }

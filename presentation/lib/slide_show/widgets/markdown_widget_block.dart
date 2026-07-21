@@ -1,6 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/code_block.dart';
+import 'package:markdown_widget/widget/markdown_block.dart';
+
+const double _markdownTextScale = 1.2;
+
+class MarkdownWidgetBlock extends StatefulWidget {
+  final String assetPath;
+  const MarkdownWidgetBlock({super.key, required this.assetPath});
+
+  @override
+  State<MarkdownWidgetBlock> createState() => _MarkdownWidgetBlockState();
+}
+
+class _MarkdownWidgetBlockState extends State<MarkdownWidgetBlock> {
+  // Loaded once and cached, so rebuilds don't re-read the asset.
+  late Future<String> _markdown;
+
+  @override
+  void initState() {
+    super.initState();
+    _markdown = rootBundle.loadString(widget.assetPath);
+  }
+
+  @override
+  void didUpdateWidget(MarkdownWidgetBlock oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.assetPath != widget.assetPath) {
+      _markdown = rootBundle.loadString(widget.assetPath);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _markdown,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: const TextScaler.linear(_markdownTextScale)),
+          child: MarkdownBlock(config: markdownConfig, data: snapshot.data!),
+        );
+      },
+    );
+  }
+}
 
 final markdownConfig = MarkdownConfig.darkConfig.copy(
   configs: [
