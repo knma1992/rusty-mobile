@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/slyde/slyde.dart';
+import 'package:slyde/slyde.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // constants/headlines.dart
@@ -205,35 +205,38 @@ class JniDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: .start,
       children: [
         jniHeadline,
-        BulletList(items: ["Breaking down the JNI function signature."]),
-        MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni.md'),
-        LabeledList(
-          items: [
-            (
-              header: "#[no_mangle]",
-              body: "Stop the compiler from renaming this function.",
+        const BulletList(items: ["Breaking down the JNI function signature."]),
+        const MarkdownWidgetBlock(assetPath: 'assets/markdown/jni/jni.md'),
+        ItemList(
+          group: ItemGroup(
+            leading: .none,
+            leadingStyle: context.textTheme.displaySmall?.copyWith(
+              color: context.colorScheme.primary,
             ),
-            (
-              header: 'extern "system"',
-              body:
-                  'Marks the function as callable from outside Rust and tells the compiler to use the platform system ABI, so the JVM can call it correctly.',
-            ),
-            (
-              header: 'JNIEnv',
-              body:
-                  'A handle to the JVM environment, used to call JNI functions and interact with Java/Kotlin objects.',
-            ),
-            (
-              header: 'JClass',
-              body:
-                  'A local reference to the Java class this function belongs to, managed by the JVM.',
-            ),
-            (header: "jint", body: "Java int corresponds to Rust's i32."),
-          ],
+            [
+              Item(
+                "Stop the compiler from renaming this function.",
+                label: "#[no_mangle]:",
+              ),
+              Item(
+                'Marks the function as callable from outside Rust and tells the compiler to use the platform system ABI, so the JVM can call it correctly.',
+                label: 'extern "system":',
+              ),
+              Item(
+                'A handle to the JVM environment, used to call JNI functions and interact with Java/Kotlin objects.',
+                label: 'JNIEnv:',
+              ),
+              Item(
+                'A local reference to the Java class this function belongs to, managed by the JVM.',
+                label: 'JClass:',
+              ),
+              Item("Java int corresponds to Rust's i32.", label: "jint:"),
+            ],
+          ),
         ),
       ],
     );

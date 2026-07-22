@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/slyde/slyde.dart';
+import 'package:slyde/slyde.dart';
 
 // constants/headlines.dart
 const uniffiHeadline = Headline(

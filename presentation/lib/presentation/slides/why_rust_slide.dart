@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/slyde/slyde.dart';
+import 'package:slyde/slyde.dart';
 
 class WhyRustSlide extends StatelessWidget {
   const WhyRustSlide({super.key});

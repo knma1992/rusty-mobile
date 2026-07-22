@@ -7,7 +7,7 @@ import 'package:presentation/presentation/slides/jni_slides.dart';
 import 'package:presentation/presentation/slides/title.dart';
 import 'package:presentation/presentation/slides/uniffi_slides.dart';
 import 'package:presentation/presentation/slides/why_rust_slide.dart';
-import 'package:presentation/slyde/slyde.dart';
+import 'package:slyde/slyde.dart';
 
 void main() async {
   await rust_api.RustLib.init();

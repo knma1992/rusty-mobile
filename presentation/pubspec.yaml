@@ -31,6 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  slyde:
+    path: ../../slyde
+
   flutter_syntax_view: ^4.1.7
   markdown_widget: ^2.3.2+8
   window_manager: ^0.5.2
