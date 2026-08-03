@@ -6,10 +6,12 @@ import android.widget.Toast
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.lifecycle.AndroidViewModel
 import de.knma.rustydroid.JniManager
+import de.knma.rustydroid.boltffiAdd
 import de.knma.rustydroid.data.BenchmarkResult
 import de.knma.rustydroid.data.City
 import de.knma.rustydroid.data.Method
 import de.knma.rustydroid.data.toBenchmarkResult
+import de.knma.rustydroid.getKarlsruheBoltffi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -49,14 +51,17 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
                 tempBenchmarkResults.addAll(
                     testAllImplementations(
                         functions = listOf(
-                            TestObject("uniffi") {
-                                uniffiAdd(it, it)
-                            },
                             TestObject("kotlin") {
                                 it + it
                             },
+                            TestObject("uniffi") {
+                                uniffiAdd(it, it)
+                            },
                             TestObject("jni") {
                                 JniManager.jni_add(it, it)
+                            },
+                            TestObject("BoltFFI") {
+                                val city = boltffiAdd(it, it)
                             }
                         ), input = 1, iterations = iterations
                     )
@@ -80,6 +85,10 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
                             TestObject("jni") {
                                 val city = City.get_karlsruhe()
                                 Log.d("MainScreenViewModel", "uniffi Karlsruhe: ${city.name}, ${city.area}")
+                            },
+                            TestObject("BoltFFI") {
+                                val city = getKarlsruheBoltffi()
+                                Log.d("MainScreenViewModel", "BoltFFI Karlsruhe: ${city.name}, ${city.area}")
                             }
                         ), input = 1, iterations = iterations
                     )
